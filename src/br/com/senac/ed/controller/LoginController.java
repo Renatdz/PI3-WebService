@@ -1,7 +1,7 @@
 package br.com.senac.ed.controller;
 
-import br.com.senac.ed.view.Login;
-import br.com.senac.ed.view.Busca;
+import br.com.senac.ed.model.Login;
+import br.com.senac.ed.model.Busca;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,9 +46,9 @@ public class LoginController implements Initializable {
             });
     	btSair.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                fecharAplicacao();
-            } 
+	            public void handle(ActionEvent event) {
+	                fecharAplicacao();
+	            } 
         });
     }
 	

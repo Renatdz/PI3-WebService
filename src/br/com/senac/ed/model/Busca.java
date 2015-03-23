@@ -1,4 +1,4 @@
-package br.com.senac.ed.view;
+package br.com.senac.ed.model;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,12 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 /**
  * @author renato1mendes
- * Classe para logar no sistema de buscas 
+ * Classe para montar a tela de busca do sistema. 
  */
-public class Login extends Application {
+public class Busca extends Application {
 	
 	private static Stage stage;
 	
@@ -22,27 +21,20 @@ public class Login extends Application {
      *
      */
     public void start(Stage stage) throws Exception {
-        Parent parent = FXMLLoader.load(getClass().getResource("fxmls/login.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("../view/fxmls/busca.fxml"));
         Scene scene = new Scene(parent);
         stage.setScene(scene);
-        stage.setTitle("Tela de Login");
+        stage.setResizable(false);
+        stage.setTitle("Tela de Busca");
         stage.show();
-        Login.stage = stage;
+        Busca.stage = stage;
     }
 	
 	/**
-     * Main da classe
-     *
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
-    
-    /**
      * Método para pegar o Stage (cenário)
      *
      */
-    public static Stage getStage() {
+	public static Stage getStage() {
         return stage;
     }  
 }

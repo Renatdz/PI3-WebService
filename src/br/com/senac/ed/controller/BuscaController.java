@@ -1,7 +1,7 @@
 package br.com.senac.ed.controller;
 
-import br.com.senac.ed.view.Busca;
-import br.com.senac.ed.view.Login;
+import br.com.senac.ed.model.Busca;
+import br.com.senac.ed.model.Login;
 
 import java.net.URL;
 import java.util.ResourceBundle;
