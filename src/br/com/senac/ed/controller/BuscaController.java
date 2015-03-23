@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import javax.swing.JOptionPane;
@@ -26,6 +27,9 @@ public class BuscaController implements Initializable {
 	//variaveis para o fxml
     @FXML
     private TextField txTextoBusca;
+    
+    @FXML
+    private Label txReturnText;
     
     @FXML
     private Button btBuscar, btSair;
@@ -72,7 +76,12 @@ public class BuscaController implements Initializable {
         if (txTextoBusca.getText().equals("")) {
         	JOptionPane.showMessageDialog(null, "Busca vazia", "Erro", JOptionPane.ERROR_MESSAGE);
         }else{
-            //fazer lógica
+        	//retornar sempre nenhum resultado for now.
+        	String mensagem = "Nenhum resultado encontrado para: " + txTextoBusca.getText();
+        	
+        	txReturnText.setText(mensagem); 
+        	
+            //System.out.println(txTextoBusca); 
         }    
     } 
     
