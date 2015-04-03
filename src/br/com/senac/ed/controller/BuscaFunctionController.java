@@ -1,8 +1,10 @@
 package br.com.senac.ed.controller;
 
-import br.com.senac.ed.model.Busca;
-import br.com.senac.ed.model.Login;
 
+import br.com.senac.ed.controller.*;
+import br.com.senac.ed.model.Search;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,7 +24,7 @@ import javax.swing.JOptionPane;
  * @author renato1mendes
  * Classe controle para montar a tela de busca do sistema. 
  */
-public class BuscaController implements Initializable {
+public class BuscaFunctionController implements Initializable {
 	
 	//variaveis para o fxml
     @FXML
@@ -44,7 +46,12 @@ public class BuscaController implements Initializable {
     	btBuscar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
                 public void handle(ActionEvent event) {
-                    busca();
+                    try {
+						busca();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                 }
             });
     	btSair.setOnAction(new EventHandler<ActionEvent>() {
@@ -61,8 +68,8 @@ public class BuscaController implements Initializable {
 	 */
 	private void sair(){
 		try {
-            new Login().start(new Stage());
-            Busca.getStage().close();
+            new LoginViewController().start(new Stage());
+            BuscaViewController.getStage().close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,17 +78,24 @@ public class BuscaController implements Initializable {
 	/**
 	 * 
 	 * Método para buscar produtos. 
+	 * @throws IOException 
 	 */
-	private void busca() {
+	private void busca() throws IOException {
         if (txTextoBusca.getText().equals("")) {
         	JOptionPane.showMessageDialog(null, "Busca vazia", "Erro", JOptionPane.ERROR_MESSAGE);
         }else{
-        	//retornar sempre nenhum resultado for now.
-        	String mensagem = "Nenhum resultado encontrado para: " + txTextoBusca.getText();
-        	
+        	//retorna mensagem
+        	String mensagem = "Resultados encontrados para: " + txTextoBusca.getText();
         	txReturnText.setText(mensagem); 
         	
-            //System.out.println(txTextoBusca); 
+        	//busca o texto na url
+        	BuscaCiaDoLivro cia = new BuscaCiaDoLivro(txTextoBusca.getText());
+    		Search consumoWeb = new Search();
+    		
+    		cia.geraURL();
+    		String retorno = consumoWeb.consumirSite(cia.getURL());
+        	
+            System.out.println(retorno); 
         }    
     } 
     

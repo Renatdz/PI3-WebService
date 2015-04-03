@@ -1,37 +1,29 @@
 package br.com.senac.ed.controller;
 
-import java.util.ArrayList;
-
-public class BuscaAmericanas extends URL {	
+public class BuscaAmericanas extends URL{
 	
-	private String retorno;
+	private String urlDoSite;
 	
 	public BuscaAmericanas (String nomeLivro){
-		super (nomeLivro);	
+		super(nomeLivro);
+	}
+
+	public void geraURL(){
+		String novoNomeLivro = getNomeLivro().replace(" ", "+");
+		
+		setURL("http://busca.americanas.com.br/busca.php?q="+novoNomeLivro+"&typeclick=1&ranking=1&ac_pos=header");
 	}
 	
-	public String retornarURL (){	
-		return urlDoSite ;	
-	}
-	@Override
-	public void geraUrl(String nomeLivro) {	
-		
-		retorno = nomeLivro.replace("", "+");
-		setUrlDoSite ("http://busca.americanas.com.br/busca.php?q="+retorno+"");
-		
+	//getters and setters
+	public void setURL(String urlDoSite){
+		this.urlDoSite = urlDoSite;
 	}
 	
-	public String getUrlDoSite (){
-		
+	public String getURL(){
 		return this.urlDoSite;
 	}
-	
-	public void setUrlDoSite (String urlDoSite){
-		
-		this.urlDoSite = urlDoSite;
-		
-	}
-
-	
 
 }
+
+
+

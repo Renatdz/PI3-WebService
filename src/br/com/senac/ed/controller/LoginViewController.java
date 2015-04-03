@@ -1,4 +1,4 @@
-package br.com.senac.ed.model;
+package br.com.senac.ed.controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  * @author renato1mendes
  * Classe para logar no sistema de buscas 
  */
-public class Login extends Application {
+public class LoginViewController extends Application {
 	
 	private static Stage stage;
 	
@@ -28,7 +28,7 @@ public class Login extends Application {
         stage.setResizable(false);
         stage.setTitle("Tela de Login");
         stage.show();
-        Login.stage = stage;
+        LoginViewController.stage = stage;
     }
 	
 	/**

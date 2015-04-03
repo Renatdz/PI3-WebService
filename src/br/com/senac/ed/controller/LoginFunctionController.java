@@ -1,7 +1,7 @@
 package br.com.senac.ed.controller;
 
-import br.com.senac.ed.model.Login;
-import br.com.senac.ed.model.Busca;
+import br.com.senac.ed.controller.LoginViewController;
+import br.com.senac.ed.controller.BuscaViewController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  * @author renato1mendes
  * Classe controle para montar a tela de login do sistema. 
  */
-public class LoginController implements Initializable {
+public class LoginFunctionController implements Initializable {
 	
 	//variaveis para o fxml
     @FXML
@@ -67,8 +67,8 @@ public class LoginController implements Initializable {
 	private void logar() {
         if (txLogin.getText().equals("admin") && txSenha.getText().equals("admin")) {
         	try {
-                new Busca().start(new Stage());
-                Login.getStage().close();
+                new BuscaViewController().start(new Stage());
+                LoginViewController.getStage().close();
             } catch (Exception e) {
                 e.printStackTrace();
             }

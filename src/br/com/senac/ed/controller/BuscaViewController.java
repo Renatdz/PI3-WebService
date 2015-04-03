@@ -1,4 +1,4 @@
-package br.com.senac.ed.model;
+package br.com.senac.ed.controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ import javafx.stage.Stage;
  * @author renato1mendes
  * Classe para montar a tela de busca do sistema. 
  */
-public class Busca extends Application {
+public class BuscaViewController extends Application {
 	
 	private static Stage stage;
 	
@@ -27,7 +27,7 @@ public class Busca extends Application {
         stage.setResizable(false);
         stage.setTitle("Tela de Busca");
         stage.show();
-        Busca.stage = stage;
+        BuscaViewController.stage = stage;
     }
 	
 	/**
