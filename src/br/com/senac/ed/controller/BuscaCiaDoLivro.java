@@ -13,7 +13,7 @@ public class BuscaCiaDoLivro extends URL {
 	public String retornarURL (){	
 		return urlDoSite ;	
 	}
-	
+	@Override
 	public void geraUrl(String nomeLivro) {	
 		
 		retorno = nomeLivro.replace("", "+");

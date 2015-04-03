@@ -12,7 +12,7 @@ public abstract class URL {
 		this.nomeLivro = nomeLivro;
 	}
 	
-	public abstract void geraUrl();
+	public abstract void geraUrl(String nomeLivro);
 	
 	public String getNomeLivro(){
 		

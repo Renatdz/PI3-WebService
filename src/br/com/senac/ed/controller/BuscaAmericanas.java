@@ -13,7 +13,7 @@ public class BuscaAmericanas extends URL {
 	public String retornarURL (){	
 		return urlDoSite ;	
 	}
-
+	@Override
 	public void geraUrl(String nomeLivro) {	
 		
 		retorno = nomeLivro.replace("", "+");
@@ -31,6 +31,7 @@ public class BuscaAmericanas extends URL {
 		this.urlDoSite = urlDoSite;
 		
 	}
+
 	
 
 }
