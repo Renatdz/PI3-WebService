@@ -16,10 +16,12 @@ public class Search {
 	public Search(){
 		//construtor vazio
 	}
+	public String stringLivro;
 	
 	public String consumirSite(String stringLivro) {
 		//string web do site.
 		String urlString = "http://www.ciadoslivros.com.br/pesquisa?t="+stringLivro+"&f=&sr=GERAL";
+		
 		
 		try {
 			URL url = new URL(urlString);
