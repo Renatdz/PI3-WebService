@@ -5,15 +5,19 @@ import java.util.ArrayList;
 public abstract class URL {
 	
 	protected String urlDoSite;
+	protected String nomeLivro;
 	
-	public URL (String urlDoSite){
+	public URL (String nomeLivro){
 		
-		this.urlDoSite = urlDoSite;
+		this.nomeLivro = nomeLivro;
 	}
 	
-	ArrayList <Object> livros = new ArrayList <Object>();
-	ArrayList <Object> precos = new ArrayList <Object>();
+	public abstract void geraUrl();
 	
+	public String getNomeLivro(){
+		
+		return this.nomeLivro;
+	}
 	
 	
 }
