@@ -8,10 +8,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -35,6 +38,9 @@ public class BuscaFunctionController implements Initializable {
     
     @FXML
     private Button btBuscar, btSair;
+    
+    @FXML
+    private ListView<String> lista = new ListView<String>();
     
 	@Override
 	
@@ -84,6 +90,10 @@ public class BuscaFunctionController implements Initializable {
         if (txTextoBusca.getText().equals("")) {
         	JOptionPane.showMessageDialog(null, "Busca vazia", "Erro", JOptionPane.ERROR_MESSAGE);
         }else{
+        	//adiciona ao histórico
+        	ObservableList<String> itens = FXCollections.observableArrayList (txTextoBusca.getText());
+        	lista.setItems(itens);
+        	
         	//retorna mensagem
         	String mensagem = "Resultados encontrados para: " + txTextoBusca.getText();
         	txReturnText.setText(mensagem); 

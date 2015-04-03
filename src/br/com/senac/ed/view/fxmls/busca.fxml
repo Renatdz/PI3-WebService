@@ -13,7 +13,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="222.0" prefWidth="519.0">
                      <children>
-                        <Label layoutX="180.0" layoutY="6.0" textAlignment="CENTER" fx:id="txReturnText"/>
+                        <Label fx:id="txReturnText" layoutX="180.0" layoutY="6.0" textAlignment="CENTER" />
                         <TableView layoutY="23.0" prefHeight="344.0" prefWidth="600.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="Nome" />
@@ -28,11 +28,11 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="368.0" prefWidth="600.0">
-                          <columns>
-                            <TableColumn prefWidth="599.0" text="Buscas Feitas" />
-                          </columns>
-                        </TableView>
+                        <ListView fx:id="lista" layoutX="-5.0" prefHeight="367.0" prefWidth="600.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <padding>
+                              <Insets left="-2.0" />
+                           </padding>
+                        </ListView>
                      </children>
                   </AnchorPane>
             </content>
