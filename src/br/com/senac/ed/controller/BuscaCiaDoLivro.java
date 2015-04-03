@@ -17,7 +17,8 @@ public class BuscaCiaDoLivro extends URL {
 	public void geraUrl(String nomeLivro) {	
 		
 		retorno = nomeLivro.replace("", "+");
-		urlDoSite = "http://www.ciadoslivros.com.br/pesquisa?t="+retorno+"&f=&sr=GERAL";
+		setUrlDoSite("http://www.ciadoslivros.com.br/pesquisa?t="+retorno+"&f=&sr=GERAL");
+		 
 	}
 	
 	public String getUrlDoSite (){

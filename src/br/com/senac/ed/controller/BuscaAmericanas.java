@@ -17,7 +17,7 @@ public class BuscaAmericanas extends URL {
 	public void geraUrl(String nomeLivro) {	
 		
 		retorno = nomeLivro.replace("", "+");
-		urlDoSite = "http://busca.americanas.com.br/busca.php?q="+retorno+"";
+		setUrlDoSite ("http://busca.americanas.com.br/busca.php?q="+retorno+"");
 		
 	}
 	
