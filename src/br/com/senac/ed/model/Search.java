@@ -16,6 +16,7 @@ public class Search {
 	public Search(){
 		//construtor vazio
 	}
+	public String stringLivro;
 	
 	public String consumirSite(String stringLivro) {
 		//string web do site.
