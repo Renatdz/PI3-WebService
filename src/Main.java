@@ -13,8 +13,8 @@ public class Main {
 		
 		Search consumoWeb = new Search();
 		
-		System.out.println(consumoWeb.consumirSite("o+simbolo+perdido"));
-		//parametro busca ex: o+simbolo+perdido 
+		//System.out.println(consumoWeb.consumirSite("http://www.ciadoslivros.com.br/pesquisa?t=o+simbolo+perdido&f=&sr=GERAL"));
+		 
 		
 	}
 	
