@@ -92,7 +92,7 @@ public class BuscaFunctionController implements Initializable {
         }else{
         	//adiciona ao histórico
         	ObservableList<String> itens = FXCollections.observableArrayList (txTextoBusca.getText());
-        	lista.setItems(itens);
+        	
         	
         	//retorna mensagem
         	String mensagem = "Resultados encontrados para: " + txTextoBusca.getText();
