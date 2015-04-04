@@ -15,9 +15,9 @@ public class JsoupAmericanas {
   
   private static void acharTituloAmericanas() throws IOException {
     Document doc = Jsoup.connect("http://busca.americanas.com.br/busca.php?q=Pequeno+principe&typeclick=1&ranking=1&ac_pos=header").get();
-    Elements titulo = doc.select("title"); // Usando combinação com Selector
+    Elements titulo = doc.select("title"); // Usando combinaï¿½ï¿½o com Selector
     for (Element title : titulo) {
-      System.out.println("O nome do livro é: "+title.text());
+      System.out.println("O nome do livro e: "+title.text());
     }
     
     
@@ -25,9 +25,9 @@ public class JsoupAmericanas {
   
   private static void acharPrecoAmericanas() throws IOException {
       Document doc = Jsoup.connect("http://busca.americanas.com.br/busca.php?q=Pequeno+principe&typeclick=1&ranking=1&ac_pos=header").get();
-      Elements preco = doc.getElementsByClass(""); // Usando combinação com Selector
+      Elements preco = doc.getElementsByClass(""); // Usando combinaï¿½ï¿½o com Selector
       for (Element prize : preco) {
-        System.out.println("Preço do livro: "+prize.text());
+        System.out.println("Preco do livro: "+prize.text());
       }
   }
 }
