@@ -14,10 +14,10 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="222.0" prefWidth="519.0">
                      <children>
                         <Label fx:id="txReturnText" layoutX="180.0" layoutY="6.0" textAlignment="CENTER" />
-                        <TableView layoutY="23.0" prefHeight="344.0" prefWidth="600.0">
+                        <TableView fx:id="table" layoutY="23.0" prefHeight="344.0" prefWidth="600.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Nome" />
-                            <TableColumn prefWidth="75.0" text="Preco" />
+                            <TableColumn fx:id="nome" prefWidth="75.0" text="Nome" />
+                            <TableColumn fx:id="preco" prefWidth="75.0" text="Preco" />
                           </columns>
                         </TableView>
                      </children>

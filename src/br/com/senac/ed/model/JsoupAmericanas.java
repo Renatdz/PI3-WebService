@@ -1,4 +1,4 @@
-package br.com.senac.ed.controller;
+package br.com.senac.ed.model;
 
 import java.io.IOException;
 

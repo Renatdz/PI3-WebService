@@ -2,10 +2,12 @@ package br.com.senac.ed.controller;
 
 
 import br.com.senac.ed.controller.*;
+import br.com.senac.ed.model.JsoupCiaDoLivro;
 import br.com.senac.ed.model.Search;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -14,6 +16,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -22,6 +26,9 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import javax.swing.JOptionPane;
+
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  * @author renato1mendes
@@ -42,8 +49,14 @@ public class BuscaFunctionController implements Initializable {
     @FXML
     private ListView<String> lista = new ListView<String>();
     
+    @FXML
+    private TableView<Element> table;
+    
+    @FXML
+    private TableColumn nome, preco;
+    
+    
 	@Override
-	
 	/**
 	 * 
 	 * Método para dar as funcoes aos botoes e campos da tela. 
@@ -92,6 +105,8 @@ public class BuscaFunctionController implements Initializable {
         }else{
         	//adiciona ao histórico
         	ObservableList<String> itens = FXCollections.observableArrayList (txTextoBusca.getText());
+        	itens.addAll(lista.getItems());
+        	lista.setItems(itens);
         	
         	
         	//retorna mensagem
@@ -101,11 +116,18 @@ public class BuscaFunctionController implements Initializable {
         	//busca o texto na url
         	BuscaCiaDoLivro cia = new BuscaCiaDoLivro(txTextoBusca.getText());
     		Search consumoWeb = new Search();
-    		
+    		//concatena a url
     		cia.geraURL();
+    		//busca o html
     		String retorno = consumoWeb.consumirSite(cia.getURL());
-        	
-            System.out.println(retorno); 
+    		
+    		//retira as partes importantes
+    		JsoupCiaDoLivro jcdl = new JsoupCiaDoLivro();
+    		Elements precos = jcdl.acharPrecoCiaDoLivro(retorno);
+    		
+    		table.setItems(FXCollections.observableArrayList(precos));
+    		
+    		 
         }    
     } 
     
