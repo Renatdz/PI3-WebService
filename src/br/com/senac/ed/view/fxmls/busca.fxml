@@ -16,8 +16,7 @@
                         <Label fx:id="txReturnText" layoutX="180.0" layoutY="6.0" textAlignment="CENTER" />
                         <TableView fx:id="table" layoutY="23.0" prefHeight="344.0" prefWidth="600.0">
                           <columns>
-                            <TableColumn fx:id="nome" prefWidth="75.0" text="Nome" />
-                            <TableColumn fx:id="preco" prefWidth="75.0" text="Preco" />
+                            <TableColumn fx:id="nome" prefWidth="596.0" text="Nome" />
                           </columns>
                         </TableView>
                      </children>

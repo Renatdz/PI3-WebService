@@ -8,6 +8,7 @@ import br.com.senac.ed.model.Search;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -50,7 +51,7 @@ public class BuscaFunctionController implements Initializable {
     private ListView<String> lista = new ListView<String>();
     
     @FXML
-    private TableView<Element> table;
+    private TableView<String> table = new TableView<String>();
     
     @FXML
     private TableColumn nome, preco;
@@ -108,7 +109,6 @@ public class BuscaFunctionController implements Initializable {
         	itens.addAll(lista.getItems());
         	lista.setItems(itens);
         	
-        	
         	//retorna mensagem
         	String mensagem = "Resultados encontrados para: " + txTextoBusca.getText();
         	txReturnText.setText(mensagem); 
@@ -123,10 +123,19 @@ public class BuscaFunctionController implements Initializable {
     		
     		//retira as partes importantes
     		JsoupCiaDoLivro jcdl = new JsoupCiaDoLivro();
-    		Elements precos = jcdl.acharPrecoCiaDoLivro(retorno);
     		
-    		table.setItems(FXCollections.observableArrayList(precos));
+    		//list para inserir na tabela
+    		ObservableList<String> precos = FXCollections.observableArrayList();
     		
+    		Elements preco = jcdl.acharPrecoCiaDoLivro(retorno);
+        	
+    		for(Element price : preco)
+    			precos.add(price.text());
+    		
+//    		for(String nome : pr)
+//    			System.out.println(nome);
+    		
+    		table.setItems(precos);
     		 
         }    
     } 

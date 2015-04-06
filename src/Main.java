@@ -20,12 +20,12 @@ public class Main {
 		
 		JsoupCiaDoLivro jcdl = new JsoupCiaDoLivro();
 		
-		Elements nomes = jcdl.acharTituloCiaDoLivro(retorno);
+//		Elements nomes = jcdl.acharTituloCiaDoLivro(retorno);
 		Elements precos = jcdl.acharPrecoCiaDoLivro(retorno);
 		
-		for(Element nome : nomes)
-			System.out.println(nome.text());
-		
+//		for(Element nome : nomes)
+//			System.out.println(nome.text());
+//		
 		for(Element preco : precos)
 			System.out.println(preco.text()); 
 		
