@@ -1,6 +1,7 @@
 package br.com.senac.ed.controller;
 
 import javafx.application.Application;
+import javafx.scene.web.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,6 +24,7 @@ public class BuscaViewController extends Application {
     public void start(Stage stage) throws Exception {
         Parent parent = FXMLLoader.load(getClass().getResource("../view/fxmls/busca.fxml"));
         Scene scene = new Scene(parent);
+        
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Tela de Busca");

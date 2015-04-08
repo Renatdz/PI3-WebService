@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.ListView;
@@ -24,6 +25,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.scene.web.WebView;
+import javafx.scene.web.WebViewBuilder;
 import javafx.stage.Stage;
 
 import javax.swing.JOptionPane;
@@ -59,6 +62,10 @@ public class BuscaFunctionController implements Initializable {
     @FXML
     private TableColumn nome, preco;
     
+    @FXML
+    private WebView web;
+    
+   
     
 	@Override
 	/**
@@ -142,9 +149,15 @@ public class BuscaFunctionController implements Initializable {
     		for(Element title : nomes)
     			System.out.println(title.text());
     		
-//    		listResult.setItems(precos);
-    		 
+    		for (Element prize : preco)
+    			System.out.println (prize.text());
+    		
+    		WebView web = new WebView();
+    		web.getEngine().load(retorno);
+    		BuscaViewController.getStage().setScene(web.getScene());
+    		   		 
         }    
     } 
     
+		
 }
