@@ -59,12 +59,14 @@ public class BuscaFunctionController implements Initializable {
     @FXML
     private TableView<String> table = new TableView<String>();
     
-    @FXML
-    private TableColumn nome, preco;
+   // @FXML
+   // private TableColumn;
     
     @FXML
     private WebView web;
     
+    ArrayList <String> livro = new ArrayList<String>();
+    ArrayList <String> precoString = new ArrayList <String>();
    
     
 	@Override
@@ -146,16 +148,25 @@ public class BuscaFunctionController implements Initializable {
 //    		for(Element title : nomes)
 //    			precos.add(title.text());
     		
-    		for(Element title : nomes)
-    			System.out.println(title.text());
+    		for(Element title : nomes){
+    			livro.add(title.text());
+    		}
+    		//System.out.println (livro);
+    			
     		
-    		for (Element prize : preco)
-    			System.out.println (prize.text());
+    		for (Element prize : preco){
+    			precoString.add(prize.text());
+    		}
+    	//	System.out.println (precoString);
+    	
+    		for (int x = 0; x <= livro.size(); x++){
+    		System.out.println ("Livro: " + livro.get(x) + precoString.get(x)); 
+    		}
     		
     		WebView web = new WebView();
     		web.getEngine().load(retorno);
     		BuscaViewController.getStage().setScene(web.getScene());
-    		   		 
+    		  		 
         }    
     } 
     
