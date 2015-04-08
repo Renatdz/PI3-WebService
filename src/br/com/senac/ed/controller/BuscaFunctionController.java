@@ -51,6 +51,9 @@ public class BuscaFunctionController implements Initializable {
     private ListView<String> lista = new ListView<String>();
     
     @FXML
+    private ListView<String> listResult = new ListView<String>();
+    
+    @FXML
     private TableView<String> table = new TableView<String>();
     
     @FXML
@@ -127,15 +130,19 @@ public class BuscaFunctionController implements Initializable {
     		//list para inserir na tabela
     		ObservableList<String> precos = FXCollections.observableArrayList();
     		
+    		Elements nomes = jcdl.acharTituloCiaDoLivro(retorno);
     		Elements preco = jcdl.acharPrecoCiaDoLivro(retorno);
-        	
-    		for(Element price : preco)
-    			precos.add(price.text());
+//        	
+//    		for(Element price : preco)
+//    			precos.add(price.text());
     		
-//    		for(String nome : pr)
-//    			System.out.println(nome);
+//    		for(Element title : nomes)
+//    			precos.add(title.text());
     		
-    		table.setItems(precos);
+    		for(Element title : nomes)
+    			System.out.println(title.text());
+    		
+//    		listResult.setItems(precos);
     		 
         }    
     } 

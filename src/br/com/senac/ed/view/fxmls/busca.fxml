@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -14,11 +15,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="222.0" prefWidth="519.0">
                      <children>
                         <Label fx:id="txReturnText" layoutX="180.0" layoutY="6.0" textAlignment="CENTER" />
-                        <TableView fx:id="table" layoutY="23.0" prefHeight="344.0" prefWidth="600.0">
-                          <columns>
-                            <TableColumn fx:id="nome" prefWidth="596.0" text="Nome" />
-                          </columns>
-                        </TableView>
+                        <WebView fx:id="web" layoutY="22.0" prefHeight="344.0" prefWidth="600.0" />
                      </children>
                   </AnchorPane>
             </content>

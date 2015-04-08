@@ -8,7 +8,7 @@ public class JsoupCiaDoLivro {
   
 	public Elements acharTituloCiaDoLivro(String html){
 	    Document doc = Jsoup.parse(html);
-	    Elements titulo = doc.select("title"); // Usando combina��o com Selector
+	    Elements titulo = doc.getElementsByClass("name"); // Usando combina��o com Selector
 	   
 	    return titulo;
 	}
