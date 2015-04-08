@@ -54,7 +54,7 @@ public class BuscaFunctionController implements Initializable {
     private ListView<String> lista = new ListView<String>();
     
     @FXML
-    private ListView<String> listResult = new ListView<String>();
+    private ListView<String> listaa = new ListView<String>();
     
     @FXML
     private TableView<String> table = new TableView<String>();
@@ -137,7 +137,7 @@ public class BuscaFunctionController implements Initializable {
     		JsoupCiaDoLivro jcdl = new JsoupCiaDoLivro();
     		
     		//list para inserir na tabela
-    		ObservableList<String> precos = FXCollections.observableArrayList();
+
     		
     		Elements nomes = jcdl.acharTituloCiaDoLivro(retorno);
     		Elements preco = jcdl.acharPrecoCiaDoLivro(retorno);
@@ -159,8 +159,14 @@ public class BuscaFunctionController implements Initializable {
     		}
     	//	System.out.println (precoString);
     	
-    		for (int x = 0; x <= livro.size(); x++){
+    		for (int x = 0; x <=livro.size(); x++){
     		System.out.println ("Livro: " + livro.get(x) + precoString.get(x)); 
+    		ObservableList<String> livros = FXCollections.observableArrayList(livro);
+    		ObservableList<String> valor = FXCollections.observableArrayList(precoString);
+    		
+    		listaa.setItems(livros);
+    		
+    		
     		}
     		
     		WebView web = new WebView();

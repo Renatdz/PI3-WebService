@@ -14,8 +14,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="222.0" prefWidth="519.0">
                      <children>
+                     	<ListView fx:id="listaa" layoutX="-5.0" prefHeight="367.0" prefWidth="600.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">	
+               				 <padding>
+                              <Insets left="-2.0" />
+                           </padding>
+                           </ListView>
                         <Label fx:id="txReturnText" layoutX="180.0" layoutY="6.0" textAlignment="CENTER" />
-                        <WebView fx:id="web" layoutY="22.0" prefHeight="344.0" prefWidth="600.0" />
                      </children>
                   </AnchorPane>
             </content>
