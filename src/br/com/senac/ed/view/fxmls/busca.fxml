@@ -11,16 +11,15 @@
       <TabPane prefHeight="409.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Resultado">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="222.0" prefWidth="519.0">
+             <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Label fx:id="txReturnText" layoutX="180.0" layoutY="6.0" textAlignment="CENTER" />
-                        <TableView fx:id="table" layoutY="1.0" prefHeight="366.0" prefWidth="600.0">
-                          <columns>
-                            <TableColumn fx:id="nome" prefWidth="434.0" text="Nome" />
-                            <TableColumn fx:id="preco" prefWidth="164.0" text="Preço" />
-                          </columns>
-                        </TableView>
+                        <ListView fx:id="listaa" layoutX="-5.0" prefHeight="367.0" prefWidth="600.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <padding>
+                              <Insets left="-2.0" />
+                           </padding>
+                        </ListView>
                      </children>
                   </AnchorPane>
             </content>

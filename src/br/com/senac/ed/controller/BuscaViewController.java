@@ -1,7 +1,6 @@
 package br.com.senac.ed.controller;
 
 import javafx.application.Application;
-import javafx.scene.web.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
