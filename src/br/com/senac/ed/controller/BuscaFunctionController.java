@@ -140,11 +140,11 @@ public class BuscaFunctionController implements Initializable {
 		    		System.out.println ("Livro: " + livro.get(x) + precoString.get(x)); 
 		    		ObservableList<String> livros = FXCollections.observableArrayList(livro);
 		    		//ObservableList<String> valor = FXCollections.observableArrayList(precoString);
-		    		
 		    		listaa.setItems(livros);	
 	    		}
-    		} catch (IndexOutOfBoundsException iobe){
-    			
+    		} catch (IndexOutOfBoundsException e){
+    			System.out.println ("----------------------------------------------------------------------------");
+    			System.out.println ("É necessário verificar este Array, pois está duplicando");
     		}
     		
         	
