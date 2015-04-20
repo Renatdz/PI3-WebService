@@ -50,10 +50,10 @@ public class BuscaFunctionController implements Initializable {
    // private TableColumn;
     
     
-    ArrayList <String> livro = new ArrayList<String>();
-    ArrayList <String> precoString = new ArrayList <String>();
+    //ArrayList <String> livro = new ArrayList<String>();
+   // ArrayList <String> precoString = new ArrayList <String>();
    
-    
+    String busca;
 	@Override
 	/**
 	 * 
@@ -108,6 +108,7 @@ public class BuscaFunctionController implements Initializable {
         	
         	//retorna mensagem
         	String mensagem = "Resultados encontrados para: " + txTextoBusca.getText();
+        	busca = txTextoBusca.getText();
         	txReturnText.setText(mensagem); 
         	
         	//busca o texto na url
@@ -120,25 +121,26 @@ public class BuscaFunctionController implements Initializable {
     		
     		//retira as partes importantes
     		FluxoUrlController fluxoUrl = new FluxoUrlController();
+    		TituloLivro titulo = new TituloLivro();
     		
     		//criação dos Elements para retornar as informações do http
     		Elements nomes = fluxoUrl.tituloCiaDoLivro(retorno);
-    		Elements preco = fluxoUrl.precoCiaDoLivro(retorno);       	
+    		//Elements preco = fluxoUrl.precoCiaDoLivro(retorno);       	
 
     		
     		//adiciona um titulo à lista
     		for(Element title : nomes){
-    			livro.add(title.text());
+    			titulo.livro.add(title.text());
     		}
        		
-    		for (Element prize : preco){
-    			precoString.add(prize.text());
-    		}
+    	//	for (Element prize : preco){
+    		//	titulo.precoString.add(prize.text());
+    	//	}
     	
     		try {
-	    		for (int x = 0; x <=livro.size(); x++) {
-		    		System.out.println ("Livro: " + livro.get(x) + precoString.get(x)); 
-		    		ObservableList<String> livros = FXCollections.observableArrayList(livro);
+	    		for (int x = 0; x <=titulo.livro.size(); x++) {
+		    		System.out.println ("Livro: " + titulo.livro.get(x)); 
+		    		ObservableList<String> livros = FXCollections.observableArrayList(titulo.livro);
 		    		//ObservableList<String> valor = FXCollections.observableArrayList(precoString);
 		    		listaa.setItems(livros);	
 	    		}
