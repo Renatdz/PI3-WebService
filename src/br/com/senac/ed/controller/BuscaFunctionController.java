@@ -137,6 +137,7 @@ public class BuscaFunctionController implements Initializable {
     		for (Element link : detalhe){
     		 System.out.println(link.attr("abs:href"));
     		 titulo.detalhes.add(link.text());
+    		 
     		}
     	
     		
@@ -146,7 +147,7 @@ public class BuscaFunctionController implements Initializable {
     			titulo.livro.add(title.text());
     			
     		}
-    		
+    		System.out.println ("Detalhe"+ titulo.detalhes);
     	  
        		
     	//	for (Element prize : preco){
@@ -158,7 +159,7 @@ public class BuscaFunctionController implements Initializable {
 		    		System.out.println ("Livro: " + titulo.livro.get(x)); 
 		    		ObservableList<String> livros = FXCollections.observableArrayList(titulo.livro);
 		    		//ObservableList<String> valor = FXCollections.observableArrayList(precoString);
-		    		listaa.setItems(livros);	
+		    		listaa.setItems(livros);
 	    		}
     		} catch (IndexOutOfBoundsException e){
     			System.out.println ("----------------------------------------------------------------------------");
