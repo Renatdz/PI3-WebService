@@ -21,6 +21,13 @@ public class FluxoUrlController {
         return preco;
     }
 	
+	public Elements detalhesCiaDoLivro(String html){
+		
+		Document doc = Jsoup.parse(html);
+		Elements detalhes = doc.getElementsByClass("name");
+		return detalhes;
+	}
+	
 	public Elements tituloAmericanas(String html) throws IOException{
 		Document doc = Jsoup.connect("http://busca.americanas.com.br/busca.php?q=Pequeno+principe&typeclick=1&ranking=1&ac_pos=header").get();
 	    Elements titulo = doc.select("title"); 

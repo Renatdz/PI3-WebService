@@ -122,16 +122,28 @@ public class BuscaFunctionController implements Initializable {
     		//retira as partes importantes
     		FluxoUrlController fluxoUrl = new FluxoUrlController();
     		TituloLivro titulo = new TituloLivro();
+    		DetalheDoLivro d = new DetalheDoLivro();
     		
     		//criação dos Elements para retornar as informações do http
     		Elements nomes = fluxoUrl.tituloCiaDoLivro(retorno);
-    		//Elements preco = fluxoUrl.precoCiaDoLivro(retorno);       	
+    		Elements preco = fluxoUrl.precoCiaDoLivro(retorno);   
+    		String retornoDetalhe = consumoWeb.consumirSite(cia.geraUrlDetalhe());
+    		
+    		Elements detalhes = d.detalhesCiaDoLivro(retornoDetalhe);
 
     		
     		//adiciona um titulo à lista
     		for(Element title : nomes){
     			titulo.livro.add(title.text());
+    			
     		}
+    		
+    		for (Element detail : detalhes){
+    			titulo.detalhes.add(detail.text());
+    			System.out.println (detalhes);
+    			
+    		}
+  
        		
     	//	for (Element prize : preco){
     		//	titulo.precoString.add(prize.text());
