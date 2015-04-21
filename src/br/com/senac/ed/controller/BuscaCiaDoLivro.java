@@ -5,7 +5,7 @@ import java.io.IOException;
 public class BuscaCiaDoLivro extends URL {
 
 	private String urlDoSite;
-	DetalheDoLivro d = new DetalheDoLivro();
+
 	TituloLivro t = new TituloLivro();
 	
 	public BuscaCiaDoLivro (String nomeLivro){
@@ -19,11 +19,6 @@ public class BuscaCiaDoLivro extends URL {
 		setURL("http://www.ciadoslivros.com.br/pesquisa?t="+novoNomeLivro+"&f=&sr=GERAL");
 	}
 	
-	public String geraUrlDetalhe () throws IOException{
-		String url = "http://www.ciadoslivros.com.br/"+ d.detalhesCiaDoLivro(getURL()) ;
-		return url;
-		
-	}
 
 	//getters and setters
 	public void setURL(String urlDoSite){

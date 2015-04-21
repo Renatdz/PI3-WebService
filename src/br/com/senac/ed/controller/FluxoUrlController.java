@@ -1,9 +1,12 @@
 package br.com.senac.ed.controller;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
@@ -20,16 +23,15 @@ public class FluxoUrlController {
         Elements preco = doc.getElementsByClass("sale-price"); 
         return preco;
     }
-	
-	public Elements detalhesCiaDoLivro(String html){
-		
-		Document doc = Jsoup.parse(html);
-		Elements detalhes = doc.getElementsByClass("name");
-		return detalhes;
+
+	public Elements Detalhe (String html) throws IOException{
+	Document doc = Jsoup.parse(html);
+	Elements links = doc.getElementsByTag("href");
+	return links;
 	}
 	
 	public Elements tituloAmericanas(String html) throws IOException{
-		Document doc = Jsoup.connect("http://busca.americanas.com.br/busca.php?q=Pequeno+principe&typeclick=1&ranking=1&ac_pos=header").get();
+		Document doc = Jsoup.connect(html).get();
 	    Elements titulo = doc.select("title"); 
 		return titulo;
 	}

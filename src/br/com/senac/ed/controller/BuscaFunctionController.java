@@ -1,10 +1,12 @@
 package br.com.senac.ed.controller;
 
 import br.com.senac.ed.model.Search;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +19,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
 import javax.swing.JOptionPane;
+
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -122,15 +126,20 @@ public class BuscaFunctionController implements Initializable {
     		//retira as partes importantes
     		FluxoUrlController fluxoUrl = new FluxoUrlController();
     		TituloLivro titulo = new TituloLivro();
-    		DetalheDoLivro d = new DetalheDoLivro();
+    
     		
     		//criação dos Elements para retornar as informações do http
     		Elements nomes = fluxoUrl.tituloCiaDoLivro(retorno);
-    		Elements preco = fluxoUrl.precoCiaDoLivro(retorno);   
-    		String retornoDetalhe = consumoWeb.consumirSite(cia.geraUrlDetalhe());
+    		Elements preco = fluxoUrl.precoCiaDoLivro(retorno);  
+    		Elements detalhe = fluxoUrl.Detalhe(retorno);
     		
-    		Elements detalhes = d.detalhesCiaDoLivro(retornoDetalhe);
-
+    		
+    		for (Element link : detalhe){
+    		 System.out.println(link.attr("abs:href"));
+    		 titulo.detalhes.add(link.text());
+    		}
+    	
+    		
     		
     		//adiciona um titulo à lista
     		for(Element title : nomes){
@@ -138,12 +147,7 @@ public class BuscaFunctionController implements Initializable {
     			
     		}
     		
-    		for (Element detail : detalhes){
-    			titulo.detalhes.add(detail.text());
-    			System.out.println (detalhes);
-    			
-    		}
-  
+    	  
        		
     	//	for (Element prize : preco){
     		//	titulo.precoString.add(prize.text());
