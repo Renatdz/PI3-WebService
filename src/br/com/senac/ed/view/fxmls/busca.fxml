@@ -54,5 +54,15 @@
             <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </padding>
       </Button>
+      <Button fx:id="btOrderCres" layoutX="264.0" layoutY="5.0" mnemonicParsing="false" text="Crescente">
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
+      </Button>
+      <Button fx:id="btOrderDecres" layoutX="176.0" layoutY="5.0" mnemonicParsing="false" text="Decrescente">
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
+      </Button>
    </children>
 </AnchorPane>

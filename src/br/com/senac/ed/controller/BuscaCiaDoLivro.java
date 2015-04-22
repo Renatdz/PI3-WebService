@@ -5,8 +5,6 @@ import java.io.IOException;
 public class BuscaCiaDoLivro extends URL {
 
 	private String urlDoSite;
-
-	TituloLivro t = new TituloLivro();
 	
 	public BuscaCiaDoLivro (String nomeLivro){
 		super(nomeLivro);

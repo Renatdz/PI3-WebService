@@ -2,9 +2,12 @@ package br.com.senac.ed.controller;
 
 import br.com.senac.ed.model.Search;
 
+import java.awt.Color;
+import java.awt.Rectangle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -13,14 +16,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -39,26 +41,18 @@ public class BuscaFunctionController implements Initializable {
     private Label txReturnText;
     
     @FXML
-    private Button btBuscar, btSair;
+    private Button btBuscar, btSair,btOrderCres,btOrderDecres;
     
     @FXML
     private ListView<String> listaHistorico = new ListView<String>();
     
     @FXML
     private ListView<String> lista = new ListView<String>();
-    
-    @FXML
-    private TableView<String> table = new TableView<String>();
-    
-   // @FXML
-   // private TableColumn;
-    
-    
-    //ArrayList <String> livro = new ArrayList<String>();
-   // ArrayList <String> precoString = new ArrayList <String>();
    
-    String busca;
-	@Override
+    private String busca;
+    private TituloLivro titulo = new TituloLivro();
+    
+  
 	/**
 	 * 
 	 * MÃ©todo para dar as funcoes aos botoes e campos da tela. 
@@ -66,24 +60,35 @@ public class BuscaFunctionController implements Initializable {
     public void initialize(URL urls, ResourceBundle resources) {
     	btBuscar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-                public void handle(ActionEvent event) {
-                    try {
-						busca();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-                }
-            });
+            public void handle(ActionEvent event) {
+                try {
+					busca();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
+    	btOrderCres.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ordenarCres();
+            }
+        });
+    	btOrderDecres.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ordenarDecres();
+            }
+        });
     	btSair.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 sair();
             } 
         });
-    	
-    	
     }
+	
 	
 	/**
 	 * 
@@ -127,8 +132,6 @@ public class BuscaFunctionController implements Initializable {
     		
     		//retira as partes importantes
     		FluxoUrlController fluxoUrl = new FluxoUrlController();
-    		TituloLivro titulo = new TituloLivro();
-    
     		
     		//criação dos Elements para retornar as informações do http
     		Elements nomes = fluxoUrl.tituloCiaDoLivro(retorno);
@@ -155,11 +158,50 @@ public class BuscaFunctionController implements Initializable {
     		//ObservableList<String> valor = FXCollections.observableArrayList(titulo.precoString);
     		lista.setItems(livros);
     		
+    		ObservableList names = FXCollections.observableArrayList();
     		
-    		//criar botao e funcao para ordenar de modo decrescente.
+    		names.addAll(
+    	             "Adam", "Alex", "Alfred", "Albert",
+    	             "Brenda", "Connie", "Derek", "Donny", 
+    	             "Lynne", "Myrtle", "Rose", "Rudolph", 
+    	             "Tony", "Trudy", "Williams", "Zach"
+    	        );
     		
-    		//lista.getOnMousePressed();
-		  		 
+    		lista.setEditable(true);
+    		lista.setCellFactory(ComboBoxListCell.forListView(names));              
+ 
         }    
-    } 		
+    }
+	
+	
+	/**
+	 * 
+	 * Metodo para ordenar a listView de forma crescente. 
+	 * 
+	 */
+	private void ordenarCres() {
+		
+		OrdenaTitulo ordenador = new OrdenaTitulo();
+		
+		ObservableList<String> titulos = FXCollections.observableArrayList(ordenador.ordernarCrescente(titulo.getTitulos()));
+		
+		lista.setItems(titulos);
+		
+	}
+	
+	/**
+	 * 
+	 * Metodo para ordenar a listView de forma decrescente. 
+	 *  
+	 */
+	private void ordenarDecres() {
+		
+		OrdenaTitulo ordenador = new OrdenaTitulo();
+		
+		ObservableList<String> titulos = FXCollections.observableArrayList(ordenador.ordenarDecrescente(titulo.getTitulos()));
+		
+		lista.setItems(titulos);
+		
+	}
+	
 }
