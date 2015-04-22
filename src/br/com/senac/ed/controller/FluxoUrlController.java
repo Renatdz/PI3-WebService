@@ -13,26 +13,30 @@ import org.jsoup.select.Elements;
 public class FluxoUrlController {
 
 	public Elements tituloCiaDoLivro(String html){
-		    Document doc = Jsoup.parse(html);
-		    Elements titulo = doc.getElementsByClass("name"); 		   
-		    return titulo;
+		Document doc = Jsoup.parse(html);
+	    Elements titulo = doc.getElementsByClass("description"); 	
+		    
+		return titulo;
 	}
 	
 	public Elements precoCiaDoLivro(String html){
         Document doc = Jsoup.parse(html);
-        Elements preco = doc.getElementsByClass("sale-price"); 
+        Elements preco = doc.getElementsByClass("sale-price");
+        
         return preco;
     }
 
-	public Elements Detalhe (String html) throws IOException{
-	Document doc = Jsoup.parse(html);
-	Elements links = doc.getElementsByTag("href");
-	return links;
+	public Elements Detalhe (String html){
+		Document doc = Jsoup.parse(html);
+		Elements links = doc.getElementsByClass("author");
+		
+		return links;
 	}
 	
 	public Elements tituloAmericanas(String html) throws IOException{
 		Document doc = Jsoup.connect(html).get();
-	    Elements titulo = doc.select("title"); 
+	    Elements titulo = doc.select("title");
+	    
 		return titulo;
 	}
 	
@@ -43,9 +47,4 @@ public class FluxoUrlController {
 //	}
 	
 
-	
-	
-	    
-	}
-	
-
+}

@@ -42,10 +42,10 @@ public class BuscaFunctionController implements Initializable {
     private Button btBuscar, btSair;
     
     @FXML
-    private ListView<String> lista = new ListView<String>();
+    private ListView<String> listaHistorico = new ListView<String>();
     
     @FXML
-    private ListView<String> listaa = new ListView<String>();
+    private ListView<String> lista = new ListView<String>();
     
     @FXML
     private TableView<String> table = new TableView<String>();
@@ -61,7 +61,7 @@ public class BuscaFunctionController implements Initializable {
 	@Override
 	/**
 	 * 
-	 * MÃ©todo para dar as funcoes aos botoes e campos da tela. 
+	 * MÃƒÂ©todo para dar as funcoes aos botoes e campos da tela. 
 	 */
     public void initialize(URL urls, ResourceBundle resources) {
     	btBuscar.setOnAction(new EventHandler<ActionEvent>() {
@@ -81,6 +81,8 @@ public class BuscaFunctionController implements Initializable {
                 sair();
             } 
         });
+    	
+    	
     }
 	
 	/**
@@ -105,10 +107,10 @@ public class BuscaFunctionController implements Initializable {
         if (txTextoBusca.getText().equals("")) {
         	JOptionPane.showMessageDialog(null, "Busca vazia", "Erro", JOptionPane.ERROR_MESSAGE);
         }else{
-        	//adiciona ao histÃ³rico
+        	//adiciona ao histÃƒÂ³rico
         	ObservableList<String> itens = FXCollections.observableArrayList (txTextoBusca.getText());
-        	itens.addAll(lista.getItems());
-        	lista.setItems(itens);
+        	itens.addAll(listaHistorico.getItems());
+        	listaHistorico.setItems(itens);
         	
         	//retorna mensagem
         	String mensagem = "Resultados encontrados para: " + txTextoBusca.getText();
@@ -128,52 +130,36 @@ public class BuscaFunctionController implements Initializable {
     		TituloLivro titulo = new TituloLivro();
     
     		
-    		//criação dos Elements para retornar as informações do http
+    		//criaÃ§Ã£o dos Elements para retornar as informaÃ§Ãµes do http
     		Elements nomes = fluxoUrl.tituloCiaDoLivro(retorno);
     		Elements preco = fluxoUrl.precoCiaDoLivro(retorno);  
     		Elements detalhe = fluxoUrl.Detalhe(retorno);
     		
     		
-    		for (Element link : detalhe){
-    		 System.out.println(link.attr("abs:href"));
-    		 titulo.detalhes.add(link.text());
-    		 
-    		}
-    	
+    		for (Element link : detalhe)
+    			 titulo.detalhes.add(link.text());    	
     		
-    		
-    		//adiciona um titulo à lista
-    		for(Element title : nomes){
+    		//adiciona um titulo Ã  lista
+    		for (Element title : nomes)
     			titulo.livro.add(title.text());
-    			
-    		}
-    		System.out.println ("Detalhe"+ titulo.detalhes);
-    	  
        		
-    	//	for (Element prize : preco){
-    		//	titulo.precoString.add(prize.text());
-    	//	}
-    	
-    		try {
-	    		for (int x = 0; x <=titulo.livro.size(); x++) {
-		    		System.out.println ("Livro: " + titulo.livro.get(x)); 
-		    		ObservableList<String> livros = FXCollections.observableArrayList(titulo.livro);
-		    		//ObservableList<String> valor = FXCollections.observableArrayList(precoString);
-		    		listaa.setItems(livros);
-	    		}
-    		} catch (IndexOutOfBoundsException e){
-    			System.out.println ("----------------------------------------------------------------------------");
-    			System.out.println ("É necessário verificar este Array, pois está duplicando");
-    		}
+    		for (Element prize : preco)
+    			titulo.precoString.add(prize.text());
+ 
+    		OrdenaTitulo ordenador = new OrdenaTitulo();
     		
-        	
-	    		
-//    		WebView web = new WebView();
-//    		web.getEngine().load(retorno);
-//    		BuscaViewController.getStage().setScene(web.getScene());
-    		  		 
+    		//setando titulo ordenado
+    		titulo.setTitulos(ordenador.ordernarCrescente(titulo.livro)); 
+    		
+    		ObservableList<String> livros = FXCollections.observableArrayList(titulo.livro);
+    		//ObservableList<String> valor = FXCollections.observableArrayList(titulo.precoString);
+    		lista.setItems(livros);
+    		
+    		
+    		//criar botao e funcao para ordenar de modo decrescente.
+    		
+    		//lista.getOnMousePressed();
+		  		 
         }    
-    } 
-    
-		
+    } 		
 }

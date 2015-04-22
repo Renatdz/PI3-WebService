@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -12,18 +15,20 @@ import br.com.senac.ed.model.Search;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
+
+	ArrayList<String> renato = new ArrayList<String>(); 
 		
-
-	TituloLivro titulo = new TituloLivro();
-	FluxoUrlController fluxo = new FluxoUrlController();
-
-	System.out.println ("Detalhe"+ titulo.detalhes);
-
+	renato.add("miauuu");
+	renato.add("miauuuuuuuuu");
+	renato.add("outro gato");
+	
 	OrdenaTitulo o = new OrdenaTitulo();
-	titulo.livro.add("kaak");
-	titulo.livro.add("beijo");
-	//o.ordernar();
-	System.out.println(titulo.livro);
+	o.ordernarCrescente(renato);
+	
+	o.ordenarDecrescente(renato);
+	
+	for(String title : renato)
+		System.out.println(title);
 	
 	}
 	public Main() {

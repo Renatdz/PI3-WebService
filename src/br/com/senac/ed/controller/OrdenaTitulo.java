@@ -1,18 +1,31 @@
 package br.com.senac.ed.controller;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class OrdenaTitulo{
 	
-	TituloLivro t = new TituloLivro();
-	
-	public ArrayList<TituloLivro> ordernar (ArrayList<TituloLivro> livro){
+	public ArrayList<String> ordernarCrescente (ArrayList<String> titulos){
 		
-		Collections.sort(livro, new Comparar());
-		return livro;
+		Collections.sort(titulos, new Comparator<String>() {
+			@Override
+			public int compare(String s1, String s2) {
+	            return s1.compareToIgnoreCase(s2);
+	        }
+		});
+		
+		return titulos;
 		
 	}
 	
+	public ArrayList<String> ordenarDecrescente (ArrayList<String> titulos){
+		
+		titulos.sort(Collections.reverseOrder());
+		
+		return titulos;
+		
+	}
 
 }
 	
