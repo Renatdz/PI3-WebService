@@ -1,25 +1,26 @@
 package br.com.senac.ed.controller;
 
-import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+
+import br.com.senac.ed.controller.Livro;
+
 
 public class OrdenaTitulo{
 	
-	public ArrayList<String> ordernarCrescente (ArrayList<String> titulos){
+	public ObservableList<String> ordernarCrescente (ObservableList<String> titulos){
 		
-		Collections.sort(titulos, new Comparator<String>() {
-			@Override
-			public int compare(String s1, String s2) {
-	            return s1.compareToIgnoreCase(s2);
-	        }
-		});
+		Collections.sort(titulos);
 		
 		return titulos;
 		
 	}
 	
-	public ArrayList<String> ordenarDecrescente (ArrayList<String> titulos){
+	public ObservableList<String> ordenarDecrescente (ObservableList<String> titulos){
 		
 		titulos.sort(Collections.reverseOrder());
 		

@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
@@ -17,9 +18,16 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.Priority;
+
+
+
 
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
@@ -38,7 +46,7 @@ public class BuscaFunctionController implements Initializable {
     private TextField txTextoBusca;
     
     @FXML
-    private Label txReturnText;
+    private Label txReturnText, txAutor, txPreco;
     
     @FXML
     private Button btBuscar, btSair,btOrderCres,btOrderDecres;
@@ -51,7 +59,8 @@ public class BuscaFunctionController implements Initializable {
    
     private String busca;
     private TituloLivro titulo = new TituloLivro();
-    
+    private ObservableList<String> titulos = FXCollections.observableArrayList();  
+    private ObservableList<String> precos = FXCollections.observableArrayList();
   
 	/**
 	 * 
@@ -112,10 +121,15 @@ public class BuscaFunctionController implements Initializable {
         if (txTextoBusca.getText().equals("")) {
         	JOptionPane.showMessageDialog(null, "Busca vazia", "Erro", JOptionPane.ERROR_MESSAGE);
         }else{
-        	//adiciona ao histÃ³rico
+        	//adiciona ao historico
         	ObservableList<String> itens = FXCollections.observableArrayList (txTextoBusca.getText());
         	itens.addAll(listaHistorico.getItems());
         	listaHistorico.setItems(itens);
+        	
+        	//limpa a lista de resultados.
+        	titulos.clear();
+        	lista.getItems().clear();
+        	
         	
         	//retorna mensagem
         	String mensagem = "Resultados encontrados para: " + txTextoBusca.getText();
@@ -138,37 +152,62 @@ public class BuscaFunctionController implements Initializable {
     		Elements preco = fluxoUrl.precoCiaDoLivro(retorno);  
     		Elements detalhe = fluxoUrl.Detalhe(retorno);
     		
-    		
-    		for (Element link : detalhe)
-    			 titulo.detalhes.add(link.text());    	
-    		
     		//adiciona um titulo à lista
     		for (Element title : nomes)
     			titulo.livro.add(title.text());
        		
     		for (Element prize : preco)
     			titulo.precoString.add(prize.text());
- 
-    		OrdenaTitulo ordenador = new OrdenaTitulo();
     		
-    		//setando titulo ordenado
-    		titulo.setTitulos(ordenador.ordernarCrescente(titulo.livro)); 
+    		for (Element link : detalhe)
+    			titulo.detalhes.add(link.text());
     		
-    		ObservableList<String> livros = FXCollections.observableArrayList(titulo.livro);
-    		//ObservableList<String> valor = FXCollections.observableArrayList(titulo.precoString);
-    		lista.setItems(livros);
+    		while(titulo.livro.size() != titulo.precoString.size()){
+    			titulo.precoString.add("R$ 43:59");
+    		}
     		
-    		ObservableList names = FXCollections.observableArrayList();
+    		while(titulo.livro.size() != titulo.detalhes.size()){
+    			titulo.detalhes.add("Frank Muller");
+    		}
     		
-    		names.addAll(
-    	             "Adam", "Alex", "Alfred", "Albert",
-    	             "Brenda", "Connie", "Derek", "Donny", 
-    	             "Lynne", "Myrtle", "Rose", "Rudolph", 
-    	             "Tony", "Trudy", "Williams", "Zach"
-    	        );
+    		final List<Livro> livros = new ArrayList<Livro>();
+    			
+    		for (int i = 0; i < titulo.livro.size(); i++) {
+    			Livro livro = new Livro();
+    			livro.setTitulo(titulo.livro.get(i));
+    			livro.setPreco(titulo.precoString.get(i));
+    			livro.setAutor(titulo.detalhes.get(i));
+    			
+    			livros.add(livro);
+			}
     		
-    		lista.setEditable(true);
-    		lista.setCellFactory(ComboBoxListCell.forListView(names));              
+    		//apaga os indices inicio e fim do conteudo.
+    		livros.remove(0);
+    		livros.remove(livros.size()-1);
+    		
+    		for(int i = 0; i < livros.size(); i++)
+    			titulos.add(livros.get(i).getTitulo());
+    		
+    		lista.setItems(titulos);
+    		
+    		lista.getSelectionModel().selectedItemProperty().addListener(
+	            new ChangeListener<String>() {
+	                public void changed(ObservableValue<? extends String> ov, 
+	                    String old_val, String new_val) {   
+	                	for(int i = 0; i < livros.size(); i++){
+	                		if(new_val == livros.get(i).getTitulo()){
+	                			txAutor.setText(livros.get(i).getPreco());
+	                			txPreco.setText(livros.get(i).getAutor());
+	                			break;
+	                		}
+	                	}    
+	                }
+	            }
+	        );
+    		
+    		
+    	
+    		
  
         }    
     }
@@ -183,7 +222,7 @@ public class BuscaFunctionController implements Initializable {
 		
 		OrdenaTitulo ordenador = new OrdenaTitulo();
 		
-		ObservableList<String> titulos = FXCollections.observableArrayList(ordenador.ordernarCrescente(titulo.getTitulos()));
+		ordenador.ordernarCrescente(titulos);
 		
 		lista.setItems(titulos);
 		
@@ -198,7 +237,7 @@ public class BuscaFunctionController implements Initializable {
 		
 		OrdenaTitulo ordenador = new OrdenaTitulo();
 		
-		ObservableList<String> titulos = FXCollections.observableArrayList(ordenador.ordenarDecrescente(titulo.getTitulos()));
+		ordenador.ordenarDecrescente(titulos);
 		
 		lista.setItems(titulos);
 		

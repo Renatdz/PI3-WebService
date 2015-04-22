@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.senac.ed.controller.BuscaFunctionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.senac.ed.controller.BuscaFunctionController">
    <children>
       <TabPane prefHeight="409.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -64,5 +64,7 @@
             <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </padding>
       </Button>
+      <Label fx:id="txAutor" layoutY="401.0" prefHeight="24.0" prefWidth="283.0" />
+      <Label fx:id="txPreco" layoutX="309.0" layoutY="401.0" prefHeight="24.0" prefWidth="291.0" />
    </children>
 </AnchorPane>
