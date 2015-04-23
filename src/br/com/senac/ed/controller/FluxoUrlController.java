@@ -15,7 +15,7 @@ public class FluxoUrlController {
 	public Elements tituloCiaDoLivro(String html){
 		Document doc = Jsoup.parse(html);
 	    Elements titulo = doc.getElementsByClass("description"); 	
-		    
+		    // encoding utf-8
 		return titulo;
 	}
 	

@@ -14,23 +14,23 @@ import br.com.senac.ed.controller.TituloLivro;
 import br.com.senac.ed.model.Search;
 
 public class Main {
-	public static void main(String[] args) throws Exception {
+	//public static void main(String[] args) throws Exception {
 
-	ArrayList<String> renato = new ArrayList<String>(); 
-		
-	renato.add("miauuu");
-	renato.add("miauuuuuuuuu");
-	renato.add("outro gato");
+//	ArrayList<String> renato = new ArrayList<String>(); 
+//		
+//	renato.add("miauuu");
+//	renato.add("miauuuuuuuuu");
+//	renato.add("outro gato");
+//	
+//	OrdenaTitulo o = new OrdenaTitulo();
+//	o.ordernarCrescente(renato);
+//	
+//	o.ordenarDecrescente(renato);
+//	
+//	for(String title : renato)
+//		System.out.println(title);
 	
-	OrdenaTitulo o = new OrdenaTitulo();
-	o.ordernarCrescente(renato);
-	
-	o.ordenarDecrescente(renato);
-	
-	for(String title : renato)
-		System.out.println(title);
-	
-	}
+	//}
 	public Main() {
 		super();
 	}
