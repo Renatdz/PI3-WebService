@@ -126,6 +126,8 @@ public class BuscaFunctionController implements Initializable {
         	itens.addAll(listaHistorico.getItems());
         	listaHistorico.setItems(itens);
         	
+        	titulo.historico.add(itens);
+        	
         	//limpa a lista de resultados.
         	titulos.clear();
         	lista.getItems().clear();
@@ -151,6 +153,10 @@ public class BuscaFunctionController implements Initializable {
     		Elements nomes = fluxoUrl.tituloCiaDoLivro(retorno);
     		Elements preco = fluxoUrl.precoCiaDoLivro(retorno);  
     		Elements detalhe = fluxoUrl.Detalhe(retorno);
+    		//Gravar o histórico em txt
+        	GravacaoHistorico gravacao = new GravacaoHistorico();
+        	gravacao.gravarHistorico(titulo.historico);
+        	System.out.println(titulo.historico);
     		
     		//adiciona um titulo Ã  lista
     		for (Element title : nomes)
@@ -242,5 +248,8 @@ public class BuscaFunctionController implements Initializable {
 		lista.setItems(titulos);
 		
 	}
+	
+	
+	
 	
 }

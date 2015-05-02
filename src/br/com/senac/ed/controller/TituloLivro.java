@@ -26,5 +26,7 @@ public class TituloLivro {
 	public	ArrayList <String> livro = new ArrayList<String>();
 	public  ArrayList <String> precoString = new ArrayList <String>();
 	public  ArrayList <String> detalhes = new ArrayList <String>();
+	public  ArrayList <Object> historico = new ArrayList <Object>();
+
 	
 }
