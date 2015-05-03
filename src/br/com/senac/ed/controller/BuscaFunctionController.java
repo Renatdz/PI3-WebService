@@ -153,7 +153,7 @@ public class BuscaFunctionController implements Initializable {
     		Elements nomes = fluxoUrl.tituloCiaDoLivro(retorno);
     		Elements preco = fluxoUrl.precoCiaDoLivro(retorno);  
     		Elements detalhe = fluxoUrl.Detalhe(retorno);
-    		//Gravar o histórico em txt
+    		//Gravar o histï¿½rico em txt
         	GravacaoHistorico gravacao = new GravacaoHistorico();
         	gravacao.gravarHistorico(titulo.historico);
         	System.out.println(titulo.historico);
@@ -210,11 +210,7 @@ public class BuscaFunctionController implements Initializable {
 	                }
 	            }
 	        );
-    		
-    		
-    	
-    		
- 
+
         }    
     }
 	
@@ -228,7 +224,7 @@ public class BuscaFunctionController implements Initializable {
 		
 		OrdenaTitulo ordenador = new OrdenaTitulo();
 		
-		ordenador.ordernarCrescente(titulos);
+		ordenador.ordenarCrescente(titulos);
 		
 		lista.setItems(titulos);
 		
