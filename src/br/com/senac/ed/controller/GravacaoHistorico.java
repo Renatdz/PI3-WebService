@@ -8,14 +8,14 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class GravacaoHistorico {
-	public String nomeArq = "C:\\Users\\Claudia Pereira\\git\\PITerceiroSemestre\\src\\br\\com\\senac\\historico.txt";
+	public String nomeArq = "../historico.txt";
 	public String texto = "";
-	public void gravarHistorico (ArrayList<Object> historico) throws IOException{
+	 public void gravarHistorico (ArrayList<Object> historico) throws IOException{
 			
 		FileWriter file = new FileWriter(nomeArq);
 		PrintWriter gravar = new PrintWriter(file);
 		
-		gravar.printf("Historico de gravação :\t");
+		gravar.printf("Historico de gravaï¿½ï¿½o :\t");
 		gravar.println(historico);
 		
 		file.close();
@@ -42,3 +42,5 @@ public class GravacaoHistorico {
 		return this.texto;
 }
 }
+
+

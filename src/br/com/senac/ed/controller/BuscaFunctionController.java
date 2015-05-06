@@ -154,10 +154,9 @@ public class BuscaFunctionController implements Initializable {
     		Elements preco = fluxoUrl.precoCiaDoLivro(retorno);  
     		Elements detalhe = fluxoUrl.Detalhe(retorno);
     		//Gravar o hist�rico em txt
-        	GravacaoHistorico gravacao = new GravacaoHistorico();
-        	gravacao.gravarHistorico(titulo.historico);
-        	System.out.println(titulo.historico);
-    		
+        	gravaHistoric gravacao = new gravaHistoric();
+    		gravacao.write(txTextoBusca.getText());
+        	
     		//adiciona um titulo à lista
     		for (Element title : nomes)
     			titulo.livro.add(title.text());
@@ -244,8 +243,5 @@ public class BuscaFunctionController implements Initializable {
 		lista.setItems(titulos);
 		
 	}
-	
-	
-	
 	
 }
