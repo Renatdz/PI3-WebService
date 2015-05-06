@@ -17,11 +17,12 @@ import java.io.IOException;
 public class gravaHistoric {
 	
 	private String texto = "";
-	private static String nomeArq = "../historico.txt";
+	private static final String nomeArq = "files/historico.txt";
 	
 	/**
 	 * Lê o arquivo para e retorna uma string de texto.
 	 * @return String this.texto
+	 * @throws IOException 
 	 */
 	public String read() throws IOException { 
 		
@@ -60,6 +61,9 @@ public class gravaHistoric {
 		
 		BufferedWriter bw;
 		bw = new BufferedWriter(new FileWriter(getNomeArq()));
+		
+		if(this.texto != "")
+			bw.write(this.texto); //adiciona o texto antigo
 		
 		//adiciona ao arquivo
 		bw.write(linha + "\n"); 
