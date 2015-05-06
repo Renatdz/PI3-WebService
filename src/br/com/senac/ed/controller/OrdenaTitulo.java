@@ -43,10 +43,8 @@ public class OrdenaTitulo{
 		     }
 		}
 		
-		ObservableList<String> result = FXCollections.observableArrayList();
-		
-		for(int i = titulos.size() - 1; i >= 0; i--)
-			result.add(titulos.get(i));
+		ObservableList<String> result = titulos;
+		result.sort(Collections.reverseOrder());
 		
 		return result;
 	}
