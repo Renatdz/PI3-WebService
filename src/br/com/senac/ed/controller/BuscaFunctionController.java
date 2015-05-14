@@ -126,13 +126,12 @@ public class BuscaFunctionController implements Initializable {
         	ObservableList<String> itens = FXCollections.observableArrayList (txTextoBusca.getText());
         	itens.addAll(listaHistorico.getItems());
         	listaHistorico.setItems(itens);
-        	
+        
         	titulo.historico.add(itens);
         	
         	//limpa a lista de resultados.
         	titulos.clear();
         	lista.getItems().clear();
-        	
         	
         	//retorna mensagem
         	String mensagem = "Resultados encontrados para: " + txTextoBusca.getText();
@@ -141,38 +140,26 @@ public class BuscaFunctionController implements Initializable {
         	
         	//busca o texto na url
         	BuscaCiaDoLivro cia = new BuscaCiaDoLivro(txTextoBusca.getText());
-    		BuscaAmericanas americanas = new BuscaAmericanas(txTextoBusca.getText());
+    		//BuscaAmericanas americanas = new BuscaAmericanas(txTextoBusca.getText());
         	Search consumoWeb = new Search();
-    		//concatena a url
     		
-        	//teste para conexão por href        	
+        	//concatena a url        	
         	//americanas.geraURL();
-        	//americanas.geraHref(americanas.getHref());
     		cia.geraURL();
     		
-    		//busca o html
+    		//busca o html em cia dos livros e americanas
     		String retornoPaginaCia = consumoWeb.consumirSite(cia.getURL());
-    	//	cia.geraHref(cia.getHref());
-    		//String retornoDetalhesCia = consumoWeb.consumirSite(cia.getHref());
     		//String retornoPaginaAmericanas = consumoWeb.consumirSite(americanas.getURL());
-    		//String retornoDetalhesAmericanas = consumoWeb.consumirSite(americanas.getHref());
+    		
     		//retira as partes importantes
     		FluxoUrlController fluxoUrl = new FluxoUrlController();
     		
-    		//criação dos Elements para retornar as informações do http
-    		//Elements nomes = fluxoUrl.tituloCiaDoLivro(retorno);
-    		//Elements detalhe = fluxoUrl.precoCiaDoLivro(retorno);  
-    		//Elements nomes = fluxoUrl.tituloCiaDoLivro(retorno);
-    		//testes abaixo
     		Elements nomesCiaDoLivro = fluxoUrl.tituloCiaDoLivro(retornoPaginaCia);
     		Elements precoCiaDoLivro = fluxoUrl.precoCiaDoLivro(retornoPaginaCia);  
     		Elements detalheCiaDoLivro = fluxoUrl.detalheCiaDoLivro(retornoPaginaCia);
-    		String hrefs = fluxoUrl.hrefPrecoCiaDoLivro(retornoPaginaCia);
     		
-    		
-    		System.out.println (fluxoUrl.hrefPrecoCiaDoLivro(retornoPaginaCia));
-    		//System.out.println (cia.getHref());
-    		//Gravar o hist�rico em txt
+ 
+    		//Gravar o historico em txt
         	gravaHistoric gravacao = new gravaHistoric();
     		gravacao.write(txTextoBusca.getText());
         	
@@ -186,33 +173,28 @@ public class BuscaFunctionController implements Initializable {
     		for (Element link : detalheCiaDoLivro)
     			titulo.detalhes.add(link.text());
     		
-  //    		for (int i = 0; i <= ){
-//    			titulo.href.add(hrefs);
-//    			System.out.println (fluxoUrl.hrefPrecoCiaDoLivro(retornoPaginaCia));
-////    			
-//    		}
     		
-    		System.out.println (fluxoUrl.hrefPrecoCiaDoLivro(retornoPaginaCia));
-    		System.out.println ("Lista" + titulo.href);
-    		    		
-    		while(titulo.livro.size() != titulo.precoString.size()){
-    			titulo.precoString.add("R$ 43:59");
-    		}
-    		
-    		while(titulo.livro.size() != titulo.detalhes.size()){
-    			titulo.detalhes.add("Frank Muller");
-    		}
-    		
-    		final List<Livro> livros = new ArrayList<Livro>();
-    			
-    		for (int i = 0; i < titulo.livro.size(); i++) {
-    			Livro livro = new Livro();
-    			livro.setTitulo(titulo.livro.get(i));
-    			livro.setPreco(titulo.precoString.get(i));
-    			livro.setAutor(titulo.detalhes.get(i));
-    			
-    			livros.add(livro);
-			}
+    		//ARRUMA O GATO, GATO 
+	    		System.out.println (fluxoUrl.hrefPrecoCiaDoLivro(retornoPaginaCia));    		    		
+	    		while(titulo.livro.size() != titulo.precoString.size()){
+	    			titulo.precoString.add("R$ 43:59");
+	    		}
+	    		
+	    		while(titulo.livro.size() != titulo.detalhes.size()){
+	    			titulo.detalhes.add("Frank Muller");
+	    		}
+	    		
+	    		final List<Livro> livros = new ArrayList<Livro>();
+	    			
+	    		for (int i = 0; i < titulo.livro.size(); i++) {
+	    			Livro livro = new Livro();
+	    			livro.setTitulo(titulo.livro.get(i));
+	    			livro.setPreco(titulo.precoString.get(i));
+	    			livro.setAutor(titulo.detalhes.get(i));
+	    			
+	    			livros.add(livro);
+				}
+    		//
     		
     		//apaga os indices inicio e fim do conteudo.
     		livros.remove(0);
@@ -241,20 +223,17 @@ public class BuscaFunctionController implements Initializable {
         }    
     }
 	
-	
 	/**
 	 * 
 	 * Metodo para ordenar a listView de forma crescente. 
 	 * 
 	 */
 	private void ordenarCres() {
-		
 		OrdenaTitulo ordenador = new OrdenaTitulo();
 		
 		ordenador.ordenarCrescente(titulos);
 		
 		lista.setItems(titulos);
-		
 	}
 	
 	/**
@@ -262,14 +241,12 @@ public class BuscaFunctionController implements Initializable {
 	 * Metodo para ordenar a listView de forma decrescente. 
 	 *  
 	 */
-	private void ordenarDecres() {
-		
+	private void ordenarDecres() {	
 		OrdenaTitulo ordenador = new OrdenaTitulo();
 		
 		ordenador.ordenarDecrescente(titulos);
 		
-		lista.setItems(titulos);
-		
+		lista.setItems(titulos);	
 	}
 	
 }

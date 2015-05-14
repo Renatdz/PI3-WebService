@@ -13,6 +13,7 @@ import org.jsoup.select.Elements;
 
 public class FluxoUrlController {
 
+	//bring me the title
 	public Elements tituloCiaDoLivro(String html){
 		Document doc = Jsoup.parse(html);
 	    Elements titulo = doc.getElementsByClass("description"); 	
@@ -20,6 +21,7 @@ public class FluxoUrlController {
 		return titulo;
 	}
 	
+	//bring me the price
 	public Elements precoCiaDoLivro(String html){
         Document doc = Jsoup.parse(html);
         Elements preco = doc.getElementsByClass("sale-price");
@@ -27,6 +29,15 @@ public class FluxoUrlController {
         return preco;
     }
 	
+	//bring me the author
+	public Elements detalheCiaDoLivro(String html){
+		Document doc = Jsoup.parse(html);
+		Elements links = doc.getElementsByClass("author");
+		
+		return links;
+	}
+	
+	//bring me the detail
 	public String hrefPrecoCiaDoLivro (String html){
 		
 		Document doc = Jsoup.parse(html);
@@ -37,12 +48,12 @@ public class FluxoUrlController {
 		return hrefText;
 	}
 	
-	public Elements detalheCiaDoLivro(String html){
-		Document doc = Jsoup.parse(html);
-		Elements links = doc.getElementsByClass("author");
-		
-		return links;
-	}
+	//bring me the 
+	//title, 
+	//price, 
+	//author, 
+	//detail 
+	//for americanas
 	
 	public Elements tituloAmericanas(String html) throws IOException{
 		Document doc = Jsoup.connect(html).get();
