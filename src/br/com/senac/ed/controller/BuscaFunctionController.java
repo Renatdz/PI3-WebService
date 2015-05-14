@@ -29,6 +29,7 @@ import javafx.scene.layout.Priority;
 
 
 
+
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 
@@ -140,33 +141,60 @@ public class BuscaFunctionController implements Initializable {
         	
         	//busca o texto na url
         	BuscaCiaDoLivro cia = new BuscaCiaDoLivro(txTextoBusca.getText());
-    		Search consumoWeb = new Search();
+    		BuscaAmericanas americanas = new BuscaAmericanas(txTextoBusca.getText());
+        	Search consumoWeb = new Search();
     		//concatena a url
-    		cia.geraURL();
-    		//busca o html
-    		String retorno = consumoWeb.consumirSite(cia.getURL());
     		
+        	//teste para conexão por href        	
+        	//americanas.geraURL();
+        	//americanas.geraHref(americanas.getHref());
+    		cia.geraURL();
+    		
+    		//busca o html
+    		String retornoPaginaCia = consumoWeb.consumirSite(cia.getURL());
+    	//	cia.geraHref(cia.getHref());
+    		//String retornoDetalhesCia = consumoWeb.consumirSite(cia.getHref());
+    		//String retornoPaginaAmericanas = consumoWeb.consumirSite(americanas.getURL());
+    		//String retornoDetalhesAmericanas = consumoWeb.consumirSite(americanas.getHref());
     		//retira as partes importantes
     		FluxoUrlController fluxoUrl = new FluxoUrlController();
     		
     		//criação dos Elements para retornar as informações do http
-    		Elements nomes = fluxoUrl.tituloCiaDoLivro(retorno);
-    		Elements preco = fluxoUrl.precoCiaDoLivro(retorno);  
-    		Elements detalhe = fluxoUrl.Detalhe(retorno);
+    		//Elements nomes = fluxoUrl.tituloCiaDoLivro(retorno);
+    		//Elements detalhe = fluxoUrl.precoCiaDoLivro(retorno);  
+    		//Elements nomes = fluxoUrl.tituloCiaDoLivro(retorno);
+    		//testes abaixo
+    		Elements nomesCiaDoLivro = fluxoUrl.tituloCiaDoLivro(retornoPaginaCia);
+    		Elements precoCiaDoLivro = fluxoUrl.precoCiaDoLivro(retornoPaginaCia);  
+    		Elements detalheCiaDoLivro = fluxoUrl.detalheCiaDoLivro(retornoPaginaCia);
+    		String hrefs = fluxoUrl.hrefPrecoCiaDoLivro(retornoPaginaCia);
+    		
+    		
+    		System.out.println (fluxoUrl.hrefPrecoCiaDoLivro(retornoPaginaCia));
+    		//System.out.println (cia.getHref());
     		//Gravar o hist�rico em txt
         	gravaHistoric gravacao = new gravaHistoric();
     		gravacao.write(txTextoBusca.getText());
         	
     		//adiciona um titulo à lista
-    		for (Element title : nomes)
+    		for (Element title : nomesCiaDoLivro)
     			titulo.livro.add(title.text());
        		
-    		for (Element prize : preco)
+    		for (Element prize : precoCiaDoLivro)
     			titulo.precoString.add(prize.text());
     		
-    		for (Element link : detalhe)
+    		for (Element link : detalheCiaDoLivro)
     			titulo.detalhes.add(link.text());
     		
+  //    		for (int i = 0; i <= ){
+//    			titulo.href.add(hrefs);
+//    			System.out.println (fluxoUrl.hrefPrecoCiaDoLivro(retornoPaginaCia));
+////    			
+//    		}
+    		
+    		System.out.println (fluxoUrl.hrefPrecoCiaDoLivro(retornoPaginaCia));
+    		System.out.println ("Lista" + titulo.href);
+    		    		
     		while(titulo.livro.size() != titulo.precoString.size()){
     			titulo.precoString.add("R$ 43:59");
     		}

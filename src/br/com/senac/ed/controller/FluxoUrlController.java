@@ -1,6 +1,7 @@
 package br.com.senac.ed.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,8 +26,18 @@ public class FluxoUrlController {
         
         return preco;
     }
-
-	public Elements Detalhe (String html){
+	
+	public String hrefPrecoCiaDoLivro (String html){
+		
+		Document doc = Jsoup.parse(html);
+		Elements href = doc.getElementsByClass("photo");
+		
+		String hrefText = href.attr("href");
+		
+		return hrefText;
+	}
+	
+	public Elements detalheCiaDoLivro(String html){
 		Document doc = Jsoup.parse(html);
 		Elements links = doc.getElementsByClass("author");
 		
