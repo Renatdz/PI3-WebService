@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author Renato Mendes
  * @version 1.0
  */
-public class gravaHistoric {
+public class GravaEmArquivo {
 	
 	private String texto = "";
 	private static final String nomeArq = "files/historico.txt";
@@ -48,7 +48,6 @@ public class gravaHistoric {
 		
 		return this.texto;
 	}
-	
 	
 	/**
 	 * Escreve o arquivo com os dados do parâmetro.

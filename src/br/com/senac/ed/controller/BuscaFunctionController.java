@@ -157,11 +157,11 @@ public class BuscaFunctionController implements Initializable {
     		Elements nomesCiaDoLivro = fluxoUrl.tituloCiaDoLivro(retornoPaginaCia);
     		Elements precoCiaDoLivro = fluxoUrl.precoCiaDoLivro(retornoPaginaCia);  
     		Elements detalheCiaDoLivro = fluxoUrl.detalheCiaDoLivro(retornoPaginaCia);
-    		
  
-    		//Gravar o historico em txt
-        	gravaHistoric gravacao = new gravaHistoric();
-    		gravacao.write(txTextoBusca.getText());
+    		//Gravar o historico em txt e no banco
+    		Historico historico = new Historico();
+    		//historico.adicionaNoArquivo(txTextoBusca.getText());
+    		historico.adicionaNoBanco(txTextoBusca.getText());
         	
     		//adiciona um titulo à lista
     		for (Element title : nomesCiaDoLivro)
