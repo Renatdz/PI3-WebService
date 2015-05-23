@@ -6,10 +6,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
+
 /**
  * @author renato1mendes
  * Classe para montar a tela de busca do sistema. 
+ * 
  */
+
+//bug da lib do javafx que o eclipse nao reconhece.
+@SuppressWarnings("restriction")
 public class BuscaViewController extends Application {
 	
 	private static Stage stage;

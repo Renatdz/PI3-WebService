@@ -2,13 +2,10 @@ package br.com.senac.ed.controller;
 
 import br.com.senac.ed.model.Search;
 
-import java.awt.Color;
-import java.awt.Rectangle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -19,30 +16,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Priority;
-
-
-
-
-
 import javax.swing.JOptionPane;
-import javax.swing.ListCellRenderer;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
- * @author vinicius
+ * @author Renato Mendes
+ * @Updated Renato Mendes
  * Classe controle para montar a tela de busca do sistema. 
  */
+
+//bug da lib do javafx que o eclipse nao reconhece.
+@SuppressWarnings("restriction")
+
 public class BuscaFunctionController implements Initializable {
 	
-	//variaveis para o fxml
+	//VARIAVEIS DO LINKADAS AO FXML
     @FXML
     private TextField txTextoBusca;
     
@@ -50,7 +43,10 @@ public class BuscaFunctionController implements Initializable {
     private Label txReturnText, txAutor, txPreco;
     
     @FXML
-    private Button btBuscar, btSair,btOrderCres,btOrderDecres;
+    private Button btBuscar, btSair;
+    
+    @FXML
+    private ChoiceBox<String> cbSort, cbHistoric;
     
     @FXML
     private ListView<String> listaHistorico = new ListView<String>();
@@ -58,39 +54,65 @@ public class BuscaFunctionController implements Initializable {
     @FXML
     private ListView<String> lista = new ListView<String>();
    
-    private String busca;
-    private TituloLivro titulo = new TituloLivro();
-    private ObservableList<String> titulos = FXCollections.observableArrayList();  
-    private ObservableList<String> precos = FXCollections.observableArrayList();
-  
+    //VARIAVEIS AUXILIARES DE BUSCA
+    private List<String> tituloAux = new ArrayList<String>();
+    private List<String> precoAux  = new ArrayList<String>();
+    private List<String> autorAux  = new ArrayList<String>();
+    private ObservableList<String> titulosLista = FXCollections.observableArrayList();  
+    
+   
 	/**
 	 * 
-	 * MÃ©todo para dar as funcoes aos botoes e campos da tela. 
+	 * Metodo para dar as funcoes aos botoes e campos da tela. 
+	 * 
 	 */
     public void initialize(URL urls, ResourceBundle resources) {
+    	//VERIFICA SE OS CHOICE BOX ESTAO VAZIOS
+    	assert cbSort     != null : "fx:id=\"cbSort\" was not injected: check your FXML file 'busca.fxml'.";
+    	assert cbHistoric != null : "fx:id=\"cbSort\" was not injected: check your FXML file 'busca.fxml'.";
+    	
+    	//CRIANDO AS OPCOES PARA OS CHOICE BOX
+    	final ObservableList<String> ordenacao = FXCollections.observableArrayList();
+    	ordenacao.addAll("Buble","Sort");
+    	final ObservableList<String> armazenamento = FXCollections.observableArrayList();
+    	armazenamento.addAll("Banco","Arquivo");
+    	
+    	//SETANDO OS CHOICE BOX
+    	cbSort.setItems(ordenacao);
+    	cbHistoric.setItems(armazenamento);
+    	
+    	//ACOES DOS BOTOES 	
+    	cbSort.getSelectionModel().selectedIndexProperty().addListener(new
+    			ChangeListener<Number>() {
+					public void changed(ObservableValue<? extends Number> ov,
+							Number value, Number new_value) {
+							ordenarPor(ordenacao.get(new_value.intValue()));
+					}
+    	});
+    	
+    	cbHistoric.getSelectionModel().selectedIndexProperty().addListener(new
+    			ChangeListener<Number>() {
+					public void changed(ObservableValue<? extends Number> ov,
+							Number value, Number new_value) {
+								try {
+									armazenarPor(armazenamento.get(new_value.intValue()));
+								} catch (IOException e) {
+									System.err.println(e.getMessage());
+								}
+					}
+    	});
+    	
     	btBuscar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
 					busca();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e.getMessage();
 				}
             }
         });
-    	btOrderCres.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ordenarCres();
-            }
-        });
-    	btOrderDecres.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ordenarDecres();
-            }
-        });
+    	
     	btSair.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -103,13 +125,14 @@ public class BuscaFunctionController implements Initializable {
 	/**
 	 * 
 	 * Metodo para voltar a tela de login. 
+	 * 
 	 */
 	private void sair(){
 		try {
             new LoginViewController().start(new Stage());
             BuscaViewController.getStage().close();
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         }
 	}
 	
@@ -117,94 +140,74 @@ public class BuscaFunctionController implements Initializable {
 	 * 
 	 * Metodo para buscar produtos. 
 	 * @throws IOException 
+	 * 
 	 */
 	private void busca() throws IOException {
         if (txTextoBusca.getText().equals("")) {
         	JOptionPane.showMessageDialog(null, "Busca vazia", "Erro", JOptionPane.ERROR_MESSAGE);
         }else{
-        	//adiciona ao historico
+        	//LIMPA LISTA DO FX
+        	lista.getItems().clear();
+        	
+        	//ADICIONA A LISTA DO HISTORICO
         	ObservableList<String> itens = FXCollections.observableArrayList (txTextoBusca.getText());
         	itens.addAll(listaHistorico.getItems());
         	listaHistorico.setItems(itens);
-        
-        	titulo.historico.add(itens);
         	
-        	//limpa a lista de resultados.
-        	titulos.clear();
-        	lista.getItems().clear();
-        	
-        	//retorna mensagem
+        	//RETORNA MENSAGEM DE RESULTADO
         	String mensagem = "Resultados encontrados para: " + txTextoBusca.getText();
-        	busca = txTextoBusca.getText();
         	txReturnText.setText(mensagem); 
-        	
-        	//busca o texto na url
+	        	
+        	//CONCATENA URL E ADICIONA O TEXTO A URL
         	BuscaCiaDoLivro cia = new BuscaCiaDoLivro(txTextoBusca.getText());
     		//BuscaAmericanas americanas = new BuscaAmericanas(txTextoBusca.getText());
-        	Search consumoWeb = new Search();
-    		
-        	//concatena a url        	
-        	//americanas.geraURL();
     		cia.geraURL();
-    		
-    		//busca o html em cia dos livros e americanas
+    		//americanas.geraURL();
+    
+    		//BUSCA HTML EM CIA DOS LIVROS E AMERICANAS
+    		Search consumoWeb = new Search();
     		String retornoPaginaCia = consumoWeb.consumirSite(cia.getURL());
     		//String retornoPaginaAmericanas = consumoWeb.consumirSite(americanas.getURL());
-    		
-    		//retira as partes importantes
+	    		
+    		//FAZ O PARSE DO HTML E RETORNA TITULO/PRECO/AUTOR
     		FluxoUrlController fluxoUrl = new FluxoUrlController();
-    		
     		Elements nomesCiaDoLivro = fluxoUrl.tituloCiaDoLivro(retornoPaginaCia);
     		Elements precoCiaDoLivro = fluxoUrl.precoCiaDoLivro(retornoPaginaCia);  
-    		Elements detalheCiaDoLivro = fluxoUrl.detalheCiaDoLivro(retornoPaginaCia);
- 
-    		//Gravar o historico em txt e no banco
-    		Historico historico = new Historico();
-    		//historico.adicionaNoArquivo(txTextoBusca.getText());
-    		historico.adicionaNoBanco(txTextoBusca.getText());
-        	
-    		//adiciona um titulo à lista
+    		Elements detalheCiaDoLivro = fluxoUrl.autorCiaDoLivro(retornoPaginaCia);
+	    		
+    		//ADICIONA TITULO/PRECO/AUTOR AS LISTAS
     		for (Element title : nomesCiaDoLivro)
-    			titulo.livro.add(title.text());
+    			tituloAux.add(title.text());
        		
     		for (Element prize : precoCiaDoLivro)
-    			titulo.precoString.add(prize.text());
+    			precoAux.add(prize.text());
     		
     		for (Element link : detalheCiaDoLivro)
-    			titulo.detalhes.add(link.text());
-    		
-    		
-    		//ARRUMA O GATO, GATO 
-	    		System.out.println (fluxoUrl.hrefPrecoCiaDoLivro(retornoPaginaCia));    		    		
-	    		while(titulo.livro.size() != titulo.precoString.size()){
-	    			titulo.precoString.add("R$ 43:59");
-	    		}
-	    		
-	    		while(titulo.livro.size() != titulo.detalhes.size()){
-	    			titulo.detalhes.add("Frank Muller");
-	    		}
-	    		
-	    		final List<Livro> livros = new ArrayList<Livro>();
-	    			
-	    		for (int i = 0; i < titulo.livro.size(); i++) {
-	    			Livro livro = new Livro();
-	    			livro.setTitulo(titulo.livro.get(i));
-	    			livro.setPreco(titulo.precoString.get(i));
-	    			livro.setAutor(titulo.detalhes.get(i));
-	    			
-	    			livros.add(livro);
-				}
-    		//
-    		
-    		//apaga os indices inicio e fim do conteudo.
-    		livros.remove(0);
-    		livros.remove(livros.size()-1);
-    		
+    			autorAux.add(link.text());
+	
+    		//RESOLVE BUG QUE RETORNA STRING RESULTS
+    		tituloAux.remove(0);
+    		tituloAux.remove(tituloAux.size()-1);
+    			
+	    	//CRIA UMA LISTA DE LIVROS
+			final List<Livro> livros = new ArrayList<Livro>();	
+    		for (int i = 0; i < tituloAux.size(); i++) {
+    			Livro livro = new Livro();
+    			livro.setTitulo(tituloAux.get(i));
+    			livro.setPreco(precoAux.get(i));
+    			livro.setAutor(autorAux.get(i));
+    			
+    			livros.add(livro);
+			}
+
+    		//ADICIONA OS TITULOS EM UM OBSERVABLE LIST
     		for(int i = 0; i < livros.size(); i++)
-    			titulos.add(livros.get(i).getTitulo());
+    			titulosLista.add(livros.get(i).getTitulo());
     		
-    		lista.setItems(titulos);
+    		//SETA OS TITULOS NA LISTA DO FX.
+    		lista.setItems(titulosLista);
     		
+    		//ACAO PARA QUANDO HOUVER UM CLIQUE EM UM LIVRO, MOSTRAR OS DETALHES.
     		lista.getSelectionModel().selectedItemProperty().addListener(
 	            new ChangeListener<String>() {
 	                public void changed(ObservableValue<? extends String> ov, 
@@ -219,34 +222,40 @@ public class BuscaFunctionController implements Initializable {
 	                }
 	            }
 	        );
-
         }    
     }
 	
 	/**
 	 * 
-	 * Metodo para ordenar a listView de forma crescente. 
+	 * Metodo para ordenar a listView com o algoritmo que o usuario escolher. 
 	 * 
 	 */
-	private void ordenarCres() {
-		OrdenaTitulo ordenador = new OrdenaTitulo();
+	private void ordenarPor(String ordenacao) {
+		Ordenacao ordenar = new Ordenacao();
 		
-		ordenador.ordenarCrescente(titulos);
+		if(ordenacao != null && ordenacao == "Buble")
+			ordenar.ordenarComBuble(titulosLista);
+		else
+			ordenar.ordenarComSort(titulosLista);
 		
-		lista.setItems(titulos);
+		lista.setItems(titulosLista);
 	}
 	
 	/**
 	 * 
-	 * Metodo para ordenar a listView de forma decrescente. 
-	 *  
+	 * Metodo armazenar o historico em qual local o usuario escolher 
+	 * @throws IOException 
+	 * 
 	 */
-	private void ordenarDecres() {	
-		OrdenaTitulo ordenador = new OrdenaTitulo();
-		
-		ordenador.ordenarDecrescente(titulos);
-		
-		lista.setItems(titulos);	
+	private void armazenarPor(String armazenamento) throws IOException {
+		Historico historico = new Historico();
+
+		if(armazenamento != null && armazenamento == "Banco")
+			if(txTextoBusca.getText() != null)
+				historico.adicionaNoBanco(txTextoBusca.getText());
+		else
+			if(txTextoBusca.getText() != null)
+				historico.adicionaNoArquivo(txTextoBusca.getText());
 	}
 	
 }

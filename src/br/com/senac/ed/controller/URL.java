@@ -18,8 +18,5 @@ public abstract class URL {
 	public String getNomeLivro() {
 		return nomeLivro;
 	}
-	
-	//ArrayList <Object> livros = new ArrayList <Object>();
-	//ArrayList <Object> precos = new ArrayList <Object>();
 
 }

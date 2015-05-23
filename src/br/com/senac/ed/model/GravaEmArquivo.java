@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.senac.ed.controller;
+package br.com.senac.ed.model;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

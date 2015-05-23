@@ -1,13 +1,9 @@
 package br.com.senac.ed.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
@@ -30,7 +26,7 @@ public class FluxoUrlController {
     }
 	
 	//bring me the author
-	public Elements detalheCiaDoLivro(String html){
+	public Elements autorCiaDoLivro(String html){
 		Document doc = Jsoup.parse(html);
 		Elements links = doc.getElementsByClass("author");
 		
@@ -61,12 +57,5 @@ public class FluxoUrlController {
 	    
 		return titulo;
 	}
-	
-
-//	public Elements precoAmericanas (String html){
-//		
-//		return ;
-//	}
-	
 
 }

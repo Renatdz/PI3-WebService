@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.senac.ed.model.BancoDeDados;
+import br.com.senac.ed.model.GravaEmArquivo;
 
 public class Historico {
 

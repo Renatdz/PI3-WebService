@@ -9,8 +9,13 @@ import javafx.stage.Stage;
 
 /**
  * @author renato1mendes
- * Classe para logar no sistema de buscas 
+ * Classe para logar no sistema de buscas
+ *  
  */
+
+//bug da lib do javafx que o eclipse nao reconhece.
+@SuppressWarnings("restriction")
+
 public class LoginViewController extends Application {
 	
 	private static Stage stage;
