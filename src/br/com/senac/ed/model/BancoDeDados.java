@@ -1,7 +1,9 @@
 package br.com.senac.ed.model;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BancoDeDados {
@@ -53,7 +55,11 @@ public class BancoDeDados {
 	
 	public void insertHistoric(String shareHistoric) {
 		try {
-			String query = "INSERT INTO historic (share_historic) VALUES ('" + shareHistoric + "');";
+			Date date = new Date();
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			
+			String query = "INSERT INTO historic (share_historic, date_insert) VALUES ('" + shareHistoric + "','"+ sdf.format(date) +"');";
 			this.statement.execute(query);
 			//System.out.println("inserido");
 			

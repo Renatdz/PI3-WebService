@@ -8,6 +8,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Classe para escrever e ler um arquivo.
@@ -61,11 +63,14 @@ public class GravaEmArquivo {
 		BufferedWriter bw;
 		bw = new BufferedWriter(new FileWriter(getNomeArq()));
 		
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		
 		if(this.texto != "")
-			bw.write(this.texto); //adiciona o texto antigo
+			bw.write(this.texto+" ---- "+sdf.format(date)); //adiciona o texto antigo
 		
 		//adiciona ao arquivo
-		bw.write(linha + "\n"); 
+		bw.write(linha +" ---- "+sdf.format(date) + "\n"); 
 		bw.write("+-----------------------------------------------------------------------------------------+\n");
 		
 		bw.close(); //fecha o arquivo
