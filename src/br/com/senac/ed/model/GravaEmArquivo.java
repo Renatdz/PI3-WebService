@@ -64,10 +64,10 @@ public class GravaEmArquivo {
 		bw = new BufferedWriter(new FileWriter(getNomeArq()));
 		
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		if(this.texto != "")
-			bw.write(this.texto+" ---- "+sdf.format(date)); //adiciona o texto antigo
+			bw.write(this.texto); //adiciona o texto antigo
 		
 		//adiciona ao arquivo
 		bw.write(linha +" ---- "+sdf.format(date) + "\n"); 

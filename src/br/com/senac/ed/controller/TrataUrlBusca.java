@@ -2,11 +2,11 @@ package br.com.senac.ed.controller;
 
 //import java.util.ArrayList;
 
-public abstract class URL {
+public abstract class TrataUrlBusca {
 	
 	private String nomeLivro;
 	
-	public URL (String nomeLivro){
+	public TrataUrlBusca (String nomeLivro){
 		this.nomeLivro = nomeLivro;
 	}
 	

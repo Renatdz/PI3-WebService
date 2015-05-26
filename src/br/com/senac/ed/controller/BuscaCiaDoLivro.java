@@ -1,7 +1,7 @@
 package br.com.senac.ed.controller;
 
 
-public class BuscaCiaDoLivro extends URL {
+public class BuscaCiaDoLivro extends TrataUrlBusca {
 
 	private String urlDoSite;
 	private String href;
@@ -13,9 +13,9 @@ public class BuscaCiaDoLivro extends URL {
 
 	@Override
 	public void geraURL(){
-		String novoNomeLivro = getNomeLivro().replace(" ", "+");
+		String tituloTratado = getNomeLivro().replace(" ", "+");
 		
-		setURL("http://www.ciadoslivros.com.br/pesquisa?t="+novoNomeLivro+"&f=&sr=GERAL");
+		setURL("http://www.ciadoslivros.com.br/pesquisa?t="+tituloTratado+"&f=&sr=GERAL");
 	}
 	
 	public void geraHref (String href){

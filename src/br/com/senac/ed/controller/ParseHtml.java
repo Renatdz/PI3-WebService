@@ -7,7 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 
-public class FluxoUrlController {
+public class ParseHtml {
 
 	//bring me the title
 	public Elements tituloCiaDoLivro(String html){

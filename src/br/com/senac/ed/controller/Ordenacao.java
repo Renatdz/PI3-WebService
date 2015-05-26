@@ -1,5 +1,7 @@
 package br.com.senac.ed.controller;
 
+import java.util.Collections;
+
 import javafx.collections.ObservableList;
 
 //bug da lib do javafx que o eclipse nao reconhece.
@@ -15,9 +17,8 @@ public class Ordenacao{
 	}
 	
 	public ObservableList<String> ordenarComSort(ObservableList<String> lista){
-		OrdenacaoBuble buble = new OrdenacaoBuble();
 		
-		buble.ordenar(lista);
+		Collections.sort(lista);
 		
 		return lista;
 	}

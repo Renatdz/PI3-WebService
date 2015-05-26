@@ -1,6 +1,6 @@
 package br.com.senac.ed.controller;
 
-import br.com.senac.ed.model.Search;
+import br.com.senac.ed.model.ConsomeWeb;
 
 import java.io.IOException;
 import java.net.URL;
@@ -165,15 +165,15 @@ public class BuscaFunctionController implements Initializable {
     		//americanas.geraURL();
     
     		//BUSCA HTML EM CIA DOS LIVROS E AMERICANAS
-    		Search consumoWeb = new Search();
+    		ConsomeWeb consumoWeb = new ConsomeWeb();
     		String retornoPaginaCia = consumoWeb.consumirSite(cia.getURL());
     		//String retornoPaginaAmericanas = consumoWeb.consumirSite(americanas.getURL());
 	    		
     		//FAZ O PARSE DO HTML E RETORNA TITULO/PRECO/AUTOR
-    		FluxoUrlController fluxoUrl = new FluxoUrlController();
-    		Elements nomesCiaDoLivro = fluxoUrl.tituloCiaDoLivro(retornoPaginaCia);
-    		Elements precoCiaDoLivro = fluxoUrl.precoCiaDoLivro(retornoPaginaCia);  
-    		Elements detalheCiaDoLivro = fluxoUrl.autorCiaDoLivro(retornoPaginaCia);
+    		ParseHtml parseHTML = new ParseHtml();
+    		Elements nomesCiaDoLivro   = parseHTML.tituloCiaDoLivro(retornoPaginaCia);
+    		Elements precoCiaDoLivro   = parseHTML.precoCiaDoLivro(retornoPaginaCia);  
+    		Elements detalheCiaDoLivro = parseHTML.autorCiaDoLivro(retornoPaginaCia);
 	    		
     		//ADICIONA TITULO/PRECO/AUTOR AS LISTAS
     		for (Element title : nomesCiaDoLivro)
@@ -249,13 +249,14 @@ public class BuscaFunctionController implements Initializable {
 	 */
 	private void armazenarPor(String armazenamento) throws IOException {
 		Historico historico = new Historico();
-
-		if(armazenamento != null && armazenamento == "Banco")
-			if(txTextoBusca.getText() != null)
-				historico.adicionaNoBanco(txTextoBusca.getText());
-		else
-			if(txTextoBusca.getText() != null)
+		
+		if(armazenamento != null && armazenamento == "Banco"){
+			historico.adicionaNoBanco(txTextoBusca.getText());
+		}else{
+			if(txTextoBusca.getText() != null){
 				historico.adicionaNoArquivo(txTextoBusca.getText());
+			}
+		}
 	}
 	
 }

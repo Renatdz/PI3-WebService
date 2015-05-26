@@ -1,19 +1,19 @@
 package br.com.senac.ed.controller;
 
-public class BuscaAmericanas extends URL{
+public class BuscaAmericanas extends TrataUrlBusca{
 	
 	private String urlDoSite;
 	private String href;
-	String hrefNaoTratada;
+	private String hrefNaoTratada;
 	
 	public BuscaAmericanas (String nomeLivro){
 		super(nomeLivro);
 	}
 
 	public void geraURL(){
-		String novoNomeLivro = getNomeLivro().replace(" ", "+");
+		String tituloTratado = getNomeLivro().replace(" ", "+");
 		
-		setURL("http://busca.americanas.com.br/busca.php?q="+novoNomeLivro+"&typeclick=1&ranking=1&ac_pos=header");
+		setURL("http://busca.americanas.com.br/busca.php?q="+tituloTratado+"&typeclick=1&ranking=1&ac_pos=header");
 	}
 	
 	public String getHref (){

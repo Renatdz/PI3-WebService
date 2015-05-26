@@ -18,9 +18,14 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 /**
- * @author renato1mendes
+ * @author Renato Mendes
+ * @update Vinicius Reis
  * Classe controle para montar a tela de login do sistema. 
+ * 
  */
+
+//bug da lib do javafx que o eclipse nao reconhece.
+@SuppressWarnings("restriction")
 public class LoginFunctionController implements Initializable {
 	
 	//variaveis para o fxml

@@ -9,11 +9,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-public class Search {
+public class ConsomeWeb {
 
 	private String retornoHTTP = null;
 	
-	public Search(){
+	public ConsomeWeb(){
 		//construtor vazio
 	}
 	

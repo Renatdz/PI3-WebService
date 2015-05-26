@@ -57,7 +57,7 @@ public class BancoDeDados {
 		try {
 			Date date = new Date();
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			
 			String query = "INSERT INTO historic (share_historic, date_insert) VALUES ('" + shareHistoric + "','"+ sdf.format(date) +"');";
 			this.statement.execute(query);
