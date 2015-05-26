@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 /**
  * @author renato1mendes
+ * @update vinicius.ribeiro
  * Classe para montar a tela de busca do sistema. 
  * 
  */

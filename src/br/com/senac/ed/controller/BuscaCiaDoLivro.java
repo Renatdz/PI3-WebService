@@ -1,5 +1,11 @@
 package br.com.senac.ed.controller;
 
+/**
+ * @author vinicius.ribeiro, renato1mendes
+ * 
+ * Classe concatena os dados para conexão no site. 
+ * 
+ */
 
 public class BuscaCiaDoLivro extends TrataUrlBusca {
 
@@ -11,7 +17,7 @@ public class BuscaCiaDoLivro extends TrataUrlBusca {
 		super(nomeLivro);
 	}
 
-	@Override
+	//Concatena o nome do livro na URL do site.
 	public void geraURL(){
 		String tituloTratado = getNomeLivro().replace(" ", "+");
 		

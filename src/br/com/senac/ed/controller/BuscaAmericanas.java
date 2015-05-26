@@ -1,5 +1,12 @@
 package br.com.senac.ed.controller;
 
+/**
+ * @author vinicius.ribeiro, renato1mendes
+ * 
+ * Classe concatena os dados para conexão no site. 
+ * 
+ */
+
 public class BuscaAmericanas extends TrataUrlBusca{
 	
 	private String urlDoSite;
@@ -10,12 +17,14 @@ public class BuscaAmericanas extends TrataUrlBusca{
 		super(nomeLivro);
 	}
 
+	//Concatena o nome do livro na URL de busca
+	
 	public void geraURL(){
 		String tituloTratado = getNomeLivro().replace(" ", "+");
 		
 		setURL("http://busca.americanas.com.br/busca.php?q="+tituloTratado+"&typeclick=1&ranking=1&ac_pos=header");
 	}
-	
+
 	public String getHref (){
 		
 		return href;
@@ -26,6 +35,7 @@ public class BuscaAmericanas extends TrataUrlBusca{
 		this.href = href;
 	}
 	
+	// Trata a Href do site
 	public String geraHref (String href){
 		hrefNaoTratada = hrefNaoTratada.trim().replace(" ", "+");
 		hrefNaoTratada = hrefNaoTratada.trim().replace("<div class='caixacampobranco'>", "");

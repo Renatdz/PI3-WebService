@@ -1,6 +1,12 @@
 package br.com.senac.ed.controller;
 
-//import java.util.ArrayList;
+/**
+ * @author vinicius.ribeiro
+ * @update renato1mendes
+ * 
+ * Classe pai das classes de busca. 
+ * 
+ */
 
 public abstract class TrataUrlBusca {
 	

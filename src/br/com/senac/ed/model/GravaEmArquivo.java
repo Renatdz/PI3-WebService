@@ -14,6 +14,7 @@ import java.util.Date;
 /**
  * Classe para escrever e ler um arquivo.
  * @author Renato Mendes
+ * @update vinicius.ribeiro
  * @version 1.0
  */
 public class GravaEmArquivo {

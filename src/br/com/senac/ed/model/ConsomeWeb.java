@@ -8,7 +8,12 @@ import java.net.HttpURLConnection;
 //import java.net.MalformedURLException;
 import java.net.URL;
 
-
+/**
+ * @author renato1mendes, vinicius.ribeiro
+ * 
+ * Classe que consome a Url do site
+ *  
+ */
 public class ConsomeWeb {
 
 	private String retornoHTTP = null;

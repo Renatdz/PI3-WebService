@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 /**
  * @author renato1mendes
+ * @update vinicius.ribeiro
  * Classe para logar no sistema de buscas
  *  
  */

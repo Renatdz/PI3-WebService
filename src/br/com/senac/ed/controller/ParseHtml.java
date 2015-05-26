@@ -1,15 +1,20 @@
 package br.com.senac.ed.controller;
-
-import java.io.IOException;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+/**
+ * @author vinicius.ribeiro
+ * @update renato1mendes
+ * 
+ * Classe que retorna os dados do html do site. 
+ * 
+ */
+
 
 public class ParseHtml {
 
-	//bring me the title
+	// Retorna os titulos do livro buscado
 	public Elements tituloCiaDoLivro(String html){
 		Document doc = Jsoup.parse(html);
 	    Elements titulo = doc.getElementsByClass("description"); 	
@@ -17,7 +22,7 @@ public class ParseHtml {
 		return titulo;
 	}
 	
-	//bring me the price
+	// Retorna os preços do livro buscado
 	public Elements precoCiaDoLivro(String html){
         Document doc = Jsoup.parse(html);
         Elements preco = doc.getElementsByClass("sale-price");
@@ -25,7 +30,7 @@ public class ParseHtml {
         return preco;
     }
 	
-	//bring me the author
+	// Retorna o autor do livro buscado
 	public Elements autorCiaDoLivro(String html){
 		Document doc = Jsoup.parse(html);
 		Elements links = doc.getElementsByClass("author");
@@ -33,7 +38,7 @@ public class ParseHtml {
 		return links;
 	}
 	
-	//bring me the detail
+	// Retorna a tag href dos livros
 	public String hrefPrecoCiaDoLivro (String html){
 		
 		Document doc = Jsoup.parse(html);
@@ -44,18 +49,4 @@ public class ParseHtml {
 		return hrefText;
 	}
 	
-	//bring me the 
-	//title, 
-	//price, 
-	//author, 
-	//detail 
-	//for americanas
-	
-	public Elements tituloAmericanas(String html) throws IOException{
-		Document doc = Jsoup.connect(html).get();
-	    Elements titulo = doc.select("title");
-	    
-		return titulo;
-	}
-
 }

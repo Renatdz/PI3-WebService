@@ -1,6 +1,14 @@
 package br.com.senac.ed.controller;
 
+/**
+ * @author vinicius.ribeiro, renato1mendes
+ * 
+ * Classe que recebe atributos do livro
+ * 
+ */
+
 public class Livro {
+	
 	
 	private String titulo;
 	private String preco;
