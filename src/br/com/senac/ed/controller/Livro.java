@@ -7,8 +7,7 @@ package br.com.senac.ed.controller;
  * 
  */
 
-public class Livro {
-	
+public class Livro implements ILivro{
 	
 	private String titulo;
 	private String preco;

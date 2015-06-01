@@ -11,8 +11,7 @@ import org.jsoup.select.Elements;
  * 
  */
 
-
-public class ParseHtml {
+public class ParseHtml implements IParseHtml {
 
 	// Retorna os titulos do livro buscado
 	public Elements tituloCiaDoLivro(String html){
@@ -22,7 +21,7 @@ public class ParseHtml {
 		return titulo;
 	}
 	
-	// Retorna os preços do livro buscado
+	// Retorna os preï¿½os do livro buscado
 	public Elements precoCiaDoLivro(String html){
         Document doc = Jsoup.parse(html);
         Elements preco = doc.getElementsByClass("sale-price");
