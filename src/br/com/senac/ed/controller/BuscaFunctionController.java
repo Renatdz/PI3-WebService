@@ -170,10 +170,10 @@ public class BuscaFunctionController implements Initializable {
     		//String retornoPaginaAmericanas = consumoWeb.consumirSite(americanas.getURL());
 	    		
     		//FAZ O PARSE DO HTML E RETORNA TITULO/PRECO/AUTOR
-    		ParseHtml parseHTML = new ParseHtml();
-    		Elements nomesCiaDoLivro   = parseHTML.tituloCiaDoLivro(retornoPaginaCia);
-    		Elements precoCiaDoLivro   = parseHTML.precoCiaDoLivro(retornoPaginaCia);  
-    		Elements detalheCiaDoLivro = parseHTML.autorCiaDoLivro(retornoPaginaCia);
+    		ParseHtml parseHTML = new ParseHtml(retornoPaginaCia);
+    		Elements nomesCiaDoLivro   = parseHTML.tituloCiaDoLivro();
+    		Elements precoCiaDoLivro   = parseHTML.precoCiaDoLivro();  
+    		Elements detalheCiaDoLivro = parseHTML.autorCiaDoLivro();
 	    		
     		//ADICIONA TITULO/PRECO/AUTOR AS LISTAS
     		for (Element title : nomesCiaDoLivro)
