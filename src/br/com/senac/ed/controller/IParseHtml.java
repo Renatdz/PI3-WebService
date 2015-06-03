@@ -13,24 +13,24 @@ public interface IParseHtml {
 	 * busca titulos dos livros buscados 
 	 * @return Elements
 	 */
-	public Elements tituloCiaDoLivro(String html);
+	public Elements tituloCiaDoLivro();
 	
 	/**
 	 * busca precos dos livros buscados 
 	 * @return Elements
 	 */
-	public Elements precoCiaDoLivro(String html);
+	public Elements precoCiaDoLivro();
 		
 	/**
 	 * busca autores dos livros buscados 
 	 * @return Elements
 	 */
-	public Elements autorCiaDoLivro(String html);
+	public Elements autorCiaDoLivro();
 		
 	/**
 	 * busca href de detalhes dos livros buscados 
 	 * @return String
 	 */
-	public String hrefPrecoCiaDoLivro (String html);
+	public String hrefPrecoCiaDoLivro();
 
 }
