@@ -1,5 +1,6 @@
 package br.com.senac.ed.controller;
 
+import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 /**
@@ -32,5 +33,17 @@ public interface IParseHtml {
 	 * @return String
 	 */
 	public String hrefPrecoCiaDoLivro();
+	
+	/**
+	 * busca href de detalhes dos livros buscados 
+	 * @return String
+	 */
+	public String getHtml();
+	
+	/**
+	 * busca href de detalhes dos livros buscados 
+	 * @return String
+	 */
+	public Document getHtmlParse();
 
 }
